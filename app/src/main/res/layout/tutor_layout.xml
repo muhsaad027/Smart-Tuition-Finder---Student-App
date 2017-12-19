@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+android:layout_gravity="center"        >
+
+        <ImageView
+            android:id="@+id/img_tutor"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="20dp"
+            android:src="@drawable/people" />
+
+        <TextView
+            android:id="@+id/tv_tutor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/img_tutor"
+            android:text="Muhammad Saad Iqbal"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_qualification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tutor_name"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_tutor"
+            android:minLines="2"
+            android:text="Bachelor's in Computer
+             Science"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_timing"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_qualification"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_tutor"
+            android:minLines="1"
+            android:text="Timing: 5:00 - 7:00 pm"
+            android:textSize="15sp" />
+
+        <TextView
+
+            android:id="@+id/tv_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timing"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_tutor"
+            android:minLines="2"
+            android:text="Salary: Monthly Basis "
+            android:textSize="15sp" />
+
+
+
+    </RelativeLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.AppCompatRatingBar
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/tv_salary"
+        android:numStars="5"
+        android:rating="2.0"
+        android:stepSize="1.0" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendreq"
+        android:text="Send Request"
+        android:layout_alignTop="@+id/tv_timing"
+        android:layout_toEndOf="@+id/tv_qualification"
+        android:layout_toRightOf="@+id/tv_qualification" />
+
+
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.saadiqbal.ht_studentmodule.Settings">
+
+    <include
+        android:id="@+id/settingstoolbar"
+        layout="@layout/general_toolbar"></include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/people" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical"
+            >
+            <View
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c4c3c3"></View>
+            <TextView
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Muhammad"
+                android:textSize="20sp" />
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Last Name"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Saad Iqbal"
+                android:textSize="20sp" />
+            <TextView
+                android:paddingLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+923313844515"
+                android:textSize="20sp" />
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="saad@ahmedgraf.com"
+                android:textSize="20sp" />
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+
+                android:text="Qualification"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bachleors in Computer Science"
+                android:textSize="20sp" />
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+
+                android:text="Change Password"
+                android:textSize="15sp" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="************"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,142 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#94060605"
+    tools:context="com.example.saadiqbal.ht_studentmodule.RequestFragment">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:background="#fff"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#246a72">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Request has been sent"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.60">
+
+            <ImageView
+                android:id="@+id/img_tutor"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/people" />
+
+            <TextView
+                android:id="@+id/tv_tutor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/img_tutor"
+                android:text="Muhammad Saad Iqbal"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_qualification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tutor_name"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_tutor"
+                android:minLines="2"
+                android:text="Bachelor's in Computer
+             Science"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_timing"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_qualification"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_tutor"
+                android:minLines="1"
+                android:text="Timing: 5:00 - 7:00 pm"
+                android:textSize="15sp" />
+
+            <TextView
+
+                android:id="@+id/tv_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_timing"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_tutor"
+                android:minLines="2"
+                android:text="Salary: Monthly Basis "
+                android:textSize="15sp" />
+
+
+
+            <android.support.v7.widget.AppCompatRatingBar
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tv_salary"
+                android:numStars="5"
+                android:rating="2.0"
+                android:stepSize="1.0" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:weightSum="2"
+            >
+            <Button
+                android:id="@+id/contactto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Contact"
+                android:background="#000"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/reqcencel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cencel "
+                android:background="#FF2000"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

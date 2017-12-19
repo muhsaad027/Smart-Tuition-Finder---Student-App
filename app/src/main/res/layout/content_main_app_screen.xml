@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainappcontainer"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.saadiqbal.ht_studentmodule.MainAppScreen"
+    tools:showIn="@layout/app_bar_main_app_screen">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.saadiqbal.ht_studentmodule.MapsActivity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginRight="12dp"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="search by course"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:drawablePadding="15dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+           />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="search"
+            android:textColor="#fff"
+            android:background="#160f29"
+            android:id="@+id/search_butons"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:clickable="true"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Max-Min Time"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:inputType="datetime"
+                android:singleLine="true"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:inputType="number"
+                android:singleLine="true"
+                android:padding="10dp"
+                android:hint="Days"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tutorview1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Recommended\n4,000 - 5,500\nVeiw"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_account_circle_black_48dp"/>
+            <TextView
+                android:id="@+id/tutorview2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Professional\n7,000 - 10,000\nVeiw"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_account_circle_black_48dp"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/reqtutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#160f29"
+            android:text="Request Tutor"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            />
+        </LinearLayout>
+
+</RelativeLayout>
