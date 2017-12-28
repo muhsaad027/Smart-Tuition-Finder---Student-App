@@ -22,17 +22,25 @@
         android:orientation="vertical"
         >
         <EditText
+            android:id="@+id/loginusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="username"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:hint="enter phone number"
+            android:inputType="number"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             />
         <EditText
+            android:id="@+id/loginpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
             android:hint="password"
+            android:password="true"
             android:paddingTop="15dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"/>
