@@ -144,6 +144,7 @@ public void onPause() {
         editor.putString(PREF_UNAME, String.valueOf(UnameValue));
         editor.putString(PREF_PASSWORD, String.valueOf(PasswordValue));
         editor.commit();
+
     }
     private void loadPreferences() {
 
