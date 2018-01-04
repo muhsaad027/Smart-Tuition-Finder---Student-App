@@ -3,6 +3,7 @@ package com.example.saadiqbal.ht_studentmodule;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 
@@ -26,15 +27,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.saadiqbal.ht_studentmodule.CoursePKG.Course;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.internal.ch;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -47,6 +55,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.example.saadiqbal.ht_studentmodule.Login.PREF_UNAME;
+
 public class MainAppScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,OnMapReadyCallback, View.OnClickListener {
@@ -55,34 +68,52 @@ public class MainAppScreen extends AppCompatActivity
     private ArrayAdapter<String> mAdapter;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    public String search_course;
     private GoogleMap mMap;
     public TextView t1,t2;
+    public String phone;
     public Button tutorReq,serach,cencelfragrequest;
+    public EditText type_course_st;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    public String Longitude, Latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        type_course_st = (EditText)findViewById(R.id.type_course);
         setSupportActionBar(toolbar);
+
+
 
         serach = (Button)findViewById(R.id.search_butons);
         serach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogClass cdd=new CustomDialogClass(MainAppScreen.this);
-                cdd.show();
+                if(type_course_st != null)
+                {
+
+                }
+                if (type_course_st.getText().toString().isEmpty())
+                {
+                    type_course_st.setError("Phone number is required!");
+                    requestFocus(type_course_st);
+                    return;
+                }
+                datasend();
+                /*CustomDialogClass cdd=new CustomDialogClass(MainAppScreen.this);
+                cdd.show();*/
+
             }
         });
-        t1 = (TextView)findViewById(R.id.tutorview1);
-        t2 = (TextView)findViewById(R.id.tutorview2);
+        t1 = (TextView)findViewById(R.id.tutorviewmain);
         tutorReq = (Button)findViewById(R.id.reqtutor);
         tutorReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                reqsend();
                 RequestFragment rf = new RequestFragment();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -97,8 +128,8 @@ public class MainAppScreen extends AppCompatActivity
                 finish();*/
             }
         });
-        t1.setOnClickListener(this);
-        t2.setOnClickListener(this);
+        //t1.setOnClickListener(this);
+       // t2.setOnClickListener(this);
         mDrawerList = (ListView)findViewById(R.id.navList1);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         addDrawerItems();
@@ -130,6 +161,13 @@ public class MainAppScreen extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
        mapFragment.getMapAsync(this);
+
+        onNewIntent(getIntent());
+    }
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
     private void addDrawerItems()
@@ -274,13 +312,18 @@ public class MainAppScreen extends AppCompatActivity
     }
 
 
-
-
-
-
-
-
-
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        logDebug("OnNewIntent called");
+        Bundle bundle= intent.getExtras();
+        if(bundle != null)
+        {
+            String name = bundle.getString("title");
+            logDebug("Name" +name);
+            t1.setText(""+ name);
+        }
+    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -372,16 +415,133 @@ public class MainAppScreen extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId())
         {
-            case R.id.tutorview1:
-
-                CustomDialogClass cdd=new CustomDialogClass(this);
-                cdd.show();
-                break;
-            case R.id.tutorview2:
+            case R.id.tutorviewmain:
 
                 CustomDialogClass cdd1=new CustomDialogClass(this);
                 cdd1.show();
                 break;
         }
     }
+
+    public  void logDebug(String message){
+        Log.v("MainAppScreen",""+message);
+    }
+    public void datasend()
+    {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            phone = (String) bundle.get("phonenumber");
+        }
+        SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+        String channel = (shared.getString(Login.PREF_UNAME, ""));
+        logDebug("username  "+channel);
+        logDebug("Latitude:  "+mLastLocation.getLatitude()+"\n Longitutde:  "+mLastLocation.getLongitude());
+//        if (phone.length() == 10) {
+//            phone = "+92" + phone;
+//        } else {
+//            phone = "+92" + phone.substring(1);
+//        }
+        AndroidNetworking.post(URLStudents.URL_StudentLangLat)
+                .addBodyParameter("phonenum", channel)
+                .addBodyParameter("longitude",""+ mLastLocation.getLongitude())
+                .addBodyParameter("latitude", ""+mLastLocation.getLatitude())
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        boolean error = false;
+                        String message = "";
+
+                        try {
+                            logDebug("Response  :  "+response);
+                            message = response.getString("message");
+                            error = response.getBoolean("error");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if(!error)
+                        {
+                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                    logDebug("Error   " + error);
+
+                    }
+                });
+    }
+    /////////////////ReqDataSend////////////////////////
+    public void reqsend()
+    {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            phone = (String) bundle.get("phonenumber");
+        }
+        SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+        String channel = (shared.getString(Login.PREF_UNAME, ""));
+        logDebug("username  "+channel);
+        logDebug("Latitude:  "+mLastLocation.getLatitude()+"\n Longitutde:  "+mLastLocation.getLongitude());
+//        if (phone.length() == 10) {
+//            phone = "+92" + phone;
+//        } else {
+//            phone = "+92" + phone.substring(1);
+//        }
+        logDebug("StdId :  "+channel + "     " +mLastLocation.getLongitude()   +"     "+mLastLocation.getLatitude()  +"   "+  type_course_st.getText().toString());
+        AndroidNetworking.get(URLStudents.URL_SendRequest2Tutor)
+                .addQueryParameter("studentId", channel)
+                .addQueryParameter("longitude",""+ mLastLocation.getLongitude())
+                .addQueryParameter("latitude", ""+mLastLocation.getLatitude())
+                .addQueryParameter("courses", type_course_st.getText().toString())
+                .setTag("test")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        boolean error = false;
+                        String message = "";
+
+                        try {
+                            logDebug("Response  :  "+response);
+                            message = response.getString("message");
+                            error = response.getBoolean("error");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if(!error)
+                        {
+                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        logDebug("Error   " + error);
+
+                    }
+                });
+    }
+    //_________________________________________________//
 }

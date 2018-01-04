@@ -18,6 +18,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.example.saadiqbal.ht_studentmodule.Notification.SendRegistrationTokenFCM;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,12 +32,12 @@ import static junit.runner.BaseTestRunner.savePreferences;
 public class Login extends AppCompatActivity {
 Button loginpage;
     //////////////////////
-    private static final String PREFS_NAME = "preferences";
-    private static final String PREF_UNAME = "Username";
-    private static final String PREF_PASSWORD = "Password";
-
+    public static final String PREFS_NAME = "preferences";
+    public static final String PREF_UNAME = "Username";
+    public static final String PREF_PASSWORD = "Password";
+    public String phone;
     private final String DefaultUnameValue = "";
-    private String UnameValue;
+    public String UnameValue;
 
     private final String DefaultPasswordValue = "";
     private String PasswordValue;
@@ -45,6 +47,16 @@ Button loginpage;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+        String channel = (shared.getString(Login.PREF_UNAME, ""));
+        String pass = (shared.getString(Login.PREF_PASSWORD, ""));
+        if(channel.length() > 0 && pass.length() > 0)
+        {
+            Intent intent = new Intent(this,MainAppScreen.class);
+            startActivity(intent);
+        }
+      //  loadPreferences();
         AndroidNetworking.initialize(getApplicationContext());
 
 
@@ -78,12 +90,22 @@ Button loginpage;
             requestFocus(loginpass);
             return;
         }
+        Intent intent = new Intent(Login.this, MainAppScreen.class);
+        intent.putExtra("phonenumber", UnameValue);
+        startActivity(intent);
+        finish();
         datasend();
     }
     public void datasend()
     {
+        phone = loginusername.getText().toString();
+        if (phone.length() == 10) {
+            phone = "+92" + phone;
+        } else {
+            phone = "+92" + phone.substring(1);
+        }
         AndroidNetworking.post(URLStudents.URL_LOGIN)
-                .addBodyParameter("phoneno", loginusername.getText().toString())
+                .addBodyParameter("phoneno", phone)
                 .addBodyParameter("pass", loginpass.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -104,9 +126,14 @@ Button loginpage;
 
                         if(!error)
                         {
+
+                            //update fcmkey url call hoga
+                            SendRegistrationTokenFCM.sendRegistrationToServer(Login.this, FirebaseInstanceId.getInstance().getToken(),phone);
+                            savePreferences();
                             Toast.makeText(Login.this,""+message,Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Login.this,MainAppScreen.class);
                             startActivity(intent);
+
                             finish();
                         }
                         else
@@ -124,20 +151,22 @@ Button loginpage;
 @Override
 public void onPause() {
     super.onPause();
-    savePreferences();
+
 }
     @Override
     public void onResume() {
         super.onResume();
-        loadPreferences();
+
     }
     private void savePreferences() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
 
+
+
         // Edit and commit
-        UnameValue = String.valueOf(loginusername.getText());
+        UnameValue = String.valueOf(phone);
         PasswordValue = String.valueOf(loginpass.getText());
         System.out.println("onPause save name: " + UnameValue);
         System.out.println("onPause save password: " + PasswordValue);

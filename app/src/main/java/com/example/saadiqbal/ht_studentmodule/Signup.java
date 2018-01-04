@@ -13,6 +13,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.saadiqbal.ht_studentmodule.CoursePKG.Authentication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,50 +77,12 @@ public class Signup extends AppCompatActivity {
             requestFocus(contactno);
             return;
         }
-        datasend();
+        Intent intent = new Intent(Signup.this, Authentication.class);
+        intent.putExtra("nameT", name.getText().toString());
+        intent.putExtra("emailT", email.getText().toString());
+        intent.putExtra("contactT", contactno.getText().toString());
+        intent.putExtra("passT", password.getText().toString());
+        startActivity(intent);
+        finish();
     }
-
-    public void datasend()
-    {
-        AndroidNetworking.post(URLStudents.URL_Registration)
-                .addBodyParameter("phoneno", contactno.getText().toString())
-                .addBodyParameter("pass", password.getText().toString())
-                .addBodyParameter("name", name.getText().toString())
-                .addBodyParameter("email", email.getText().toString())
-                .setTag("test")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        boolean error = false;
-                        String message = "";
-
-                        try {
-                            message = response.getString("message");
-                            error = response.getBoolean("error");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        if(!error)
-                        {
-                            Toast.makeText(Signup.this,""+message,Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Signup.this,MainAppScreen.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else
-                        {
-                            Toast.makeText(Signup.this,""+message,Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                    }
-                });
-    }
-
 }
