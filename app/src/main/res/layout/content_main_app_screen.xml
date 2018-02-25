@@ -66,43 +66,15 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="#160f29">
-            <!--<EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Max-Min Time"
-                android:padding="10dp"
-                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp">
-
-            </LinearLayout>
-
-                android:textSize="17sp"
-                android:inputType="datetime"
-                android:singleLine="true"
-                android:gravity="center"
-                android:layout_weight="0.5"
-                />-->
-
-           <!-- <EditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:inputType="number"
-                android:singleLine="true"
-                android:padding="10dp"
-                android:hint="Days"
-                android:textSize="17sp" />-->
+            android:background="#160f29"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                android:text="Available Tutor"
+                android:text="Find Tutor"
                 android:textColor="#fff"
                 android:textAlignment="center"
 
@@ -111,41 +83,50 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="131dp"
-                android:layout_height="117dp"
-                android:background="@drawable/people"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                />
 
             <TextView
                 android:id="@+id/tutorviewmain"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:text="Muhammad Saad Iqbal\nBachelor's in Computer\nScience\n4.8 rating"
+                android:textAlignment="center"
                 android:padding="10dp"
                 android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:autoLink="phone"
+                android:textAlignment="center" />
 
         </LinearLayout>
-        <Button
-            android:id="@+id/reqtutor"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="#160f29"
-            android:text="Request Tutor"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            />
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/reqtutor"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#160f29"
+                android:text="Request Tutor"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
         </LinearLayout>
+
+        </LinearLayout>
+
 
 </RelativeLayout>

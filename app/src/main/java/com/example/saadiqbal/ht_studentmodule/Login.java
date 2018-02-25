@@ -92,8 +92,6 @@ Button loginpage;
         }
         Intent intent = new Intent(Login.this, MainAppScreen.class);
         intent.putExtra("phonenumber", UnameValue);
-        startActivity(intent);
-        finish();
         datasend();
     }
     public void datasend()

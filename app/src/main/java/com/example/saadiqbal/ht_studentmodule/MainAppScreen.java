@@ -55,49 +55,52 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import static com.example.saadiqbal.ht_studentmodule.Login.PREF_UNAME;
 
 public class MainAppScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,OnMapReadyCallback, View.OnClickListener {
+        GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener {
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
     Location mLastLocation;
     Marker mCurrLocationMarker;
     public String search_course;
+    public String contact;
     private GoogleMap mMap;
-    public TextView t1,t2;
+    public TextView t1, t2, nummm;
     public String phone;
-    public Button tutorReq,serach,cencelfragrequest;
+    public Button tutorReq, serach, cencelfragrequest;
     public EditText type_course_st;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     public String Longitude, Latitude;
+    private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
+    private HashMap<Integer, JSONObject> hashMapTutors = new HashMap<Integer, JSONObject>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        type_course_st = (EditText)findViewById(R.id.type_course);
+        type_course_st = (EditText) findViewById(R.id.type_course);
         setSupportActionBar(toolbar);
 
 
-
-        serach = (Button)findViewById(R.id.search_butons);
+        serach = (Button) findViewById(R.id.search_butons);
         serach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(type_course_st != null)
-                {
+                if (type_course_st != null) {
 
                 }
-                if (type_course_st.getText().toString().isEmpty())
-                {
+                if (type_course_st.getText().toString().isEmpty()) {
                     type_course_st.setError("Phone number is required!");
                     requestFocus(type_course_st);
                     return;
@@ -108,8 +111,9 @@ public class MainAppScreen extends AppCompatActivity
 
             }
         });
-        t1 = (TextView)findViewById(R.id.tutorviewmain);
-        tutorReq = (Button)findViewById(R.id.reqtutor);
+        nummm = (TextView) findViewById(R.id.phoneNumber);
+        t1 = (TextView) findViewById(R.id.tutorviewmain);
+        tutorReq = (Button) findViewById(R.id.reqtutor);
         tutorReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,8 +122,8 @@ public class MainAppScreen extends AppCompatActivity
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
 
-                ft.setCustomAnimations(R.anim.slide_in,R.anim.slide_out);
-                ft.replace(R.id.mainappcontainer,rf);
+                ft.setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
+                ft.replace(R.id.mainappcontainer, rf);
 
                 ft.commit();
                 //Toast.makeText(getBaseContext(), "Request Cencel",Toast.LENGTH_LONG).show();
@@ -129,9 +133,9 @@ public class MainAppScreen extends AppCompatActivity
             }
         });
         //t1.setOnClickListener(this);
-       // t2.setOnClickListener(this);
-        mDrawerList = (ListView)findViewById(R.id.navList1);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        // t2.setOnClickListener(this);
+        mDrawerList = (ListView) findViewById(R.id.navList1);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         addDrawerItems();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -160,20 +164,20 @@ public class MainAppScreen extends AppCompatActivity
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-       mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);
 
         onNewIntent(getIntent());
     }
+
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
-    private void addDrawerItems()
-    {
-        String[] a = {"Short Courses","1- Photoshop","2- Language","3- Networking","4- Android","5- Web Development","6- Database","7- MS Office","8- Wordpress"};
-        mAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,a);
+    private void addDrawerItems() {
+        String[] a = {"Short Courses", "1- Photoshop", "2- Language", "3- Networking", "4- Android", "5- Web Development", "6- Database", "7- MS Office", "8- Wordpress"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, a);
         mDrawerList.setAdapter(mAdapter);
 
     }
@@ -216,25 +220,25 @@ public class MainAppScreen extends AppCompatActivity
         if (id == R.id.INBOX) {
             // Handle the camera action
 
-            Intent i = new Intent(this,InboxActivity.class);
+            Intent i = new Intent(this, InboxActivity.class);
             startActivity(i);
         } else if (id == R.id.COURSES) {
 
-            Intent ia = new Intent(this,Course.class);
+            Intent ia = new Intent(this, Course.class);
             startActivity(ia);
 
         } else if (id == R.id.FAQS) {
-            Intent iaa = new Intent(this,FAQs.class);
+            Intent iaa = new Intent(this, FAQs.class);
             startActivity(iaa);
 
         } else if (id == R.id.HELP) {
 
         } else if (id == R.id.SETTINGS) {
-            Intent iaa = new Intent(this,Settings.class);
+            Intent iaa = new Intent(this, Settings.class);
             startActivity(iaa);
 
         } else if (id == R.id.CONTACT) {
-            Intent iaa = new Intent(this,About.class);
+            Intent iaa = new Intent(this, About.class);
             startActivity(iaa);
         }
 
@@ -247,8 +251,8 @@ public class MainAppScreen extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
 
 
-        mMap=googleMap;
-       // mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap = googleMap;
+        // mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -262,11 +266,12 @@ public class MainAppScreen extends AppCompatActivity
                 //Request Location Permission
                 checkLocationPermission();
             }
-        }
-        else {
+        } else {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
+
         }
+        mMap.setOnMarkerClickListener(this);
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -316,12 +321,14 @@ public class MainAppScreen extends AppCompatActivity
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         logDebug("OnNewIntent called");
-        Bundle bundle= intent.getExtras();
-        if(bundle != null)
-        {
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            contact = bundle.getString("phoneNo");
+            String type = bundle.getString("type");
             String name = bundle.getString("title");
-            logDebug("Name" +name);
-            t1.setText(""+ name);
+            logDebug("Name" + name);
+            t1.setText("Status : Available\n" + name + "\nType : " + type);
+            nummm.setText(contact);
         }
     }
 
@@ -342,16 +349,13 @@ public class MainAppScreen extends AppCompatActivity
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
 
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
         }
     }
-
-
-
 
 
     @Override
@@ -363,7 +367,7 @@ public class MainAppScreen extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest,this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 
     }
@@ -413,21 +417,20 @@ public class MainAppScreen extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.tutorviewmain:
 
-                CustomDialogClass cdd1=new CustomDialogClass(this);
+                CustomDialogClass cdd1 = new CustomDialogClass(this,new JSONObject());
                 cdd1.show();
                 break;
         }
     }
 
-    public  void logDebug(String message){
-        Log.v("MainAppScreen",""+message);
+    public void logDebug(String message) {
+        Log.v("MainAppScreen", "" + message);
     }
-    public void datasend()
-    {
+
+    public void datasend() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -435,17 +438,18 @@ public class MainAppScreen extends AppCompatActivity
         }
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
-        logDebug("username  "+channel);
-        logDebug("Latitude:  "+mLastLocation.getLatitude()+"\n Longitutde:  "+mLastLocation.getLongitude());
+        logDebug("username  " + channel);
+        logDebug("Latitude:  " + mLastLocation.getLatitude() + "\n Longitutde:  " + mLastLocation.getLongitude());
 //        if (phone.length() == 10) {
 //            phone = "+92" + phone;
 //        } else {
 //            phone = "+92" + phone.substring(1);
 //        }
-        AndroidNetworking.post(URLStudents.URL_StudentLangLat)
-                .addBodyParameter("phonenum", channel)
-                .addBodyParameter("longitude",""+ mLastLocation.getLongitude())
-                .addBodyParameter("latitude", ""+mLastLocation.getLatitude())
+        AndroidNetworking.get(URLStudents.URL_TutorGetInfo)
+                .addQueryParameter("studentId", channel)
+                .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
+                .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
+                .addQueryParameter("courses", "" + type_course_st.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -456,15 +460,38 @@ public class MainAppScreen extends AppCompatActivity
                         String message = "";
 
                         try {
-                            logDebug("Response  :  "+response);
-                            message = response.getString("message");
-                            error = response.getBoolean("error");
+                            logDebug("Response  :  " + response);
+                            JSONArray tutorArray = response.getJSONArray("result");
+
+                            for (int i = 0; i < tutorArray.length(); i++) {
+                                JSONObject tutor = tutorArray.getJSONObject(i);
+                                double longitude = tutor.getDouble("Longitude");
+                                double latitude = tutor.getDouble("Latitude");
+                                String name = tutor.getString("TutName");
+                                String TutPhone = tutor.getString("TutPhone");
+                                LatLng latLng = new LatLng(latitude, longitude);
+                                MarkerOptions markerOptions = new MarkerOptions();
+
+                                markerOptions.position(latLng);
+                                markerOptions.title("" + name);
+                                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                markerOptions.snippet(TutPhone);
+
+                                Marker marker = mMap.addMarker(markerOptions);
+
+                                hashMapTutors.put(i, tutor);
+                                mHashMap.put(marker, i);
+                            }
+                            ///  longitude
+                            //
+                            // message = response.getString("message");
+                            //   error = response.getBoolean("error");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            logDebug("Error " + e.getLocalizedMessage());
                         }
 
 
-                        if(!error)
+                      /*  if(!error)
                         {
                             Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
                             Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
@@ -473,19 +500,20 @@ public class MainAppScreen extends AppCompatActivity
                         {
                             Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
                             Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
-                        }
+                        }*/
                     }
+
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                    logDebug("Error   " + error);
+                        logDebug("Error   " + error);
 
                     }
                 });
     }
+
     /////////////////ReqDataSend////////////////////////
-    public void reqsend()
-    {
+    public void reqsend() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -493,18 +521,18 @@ public class MainAppScreen extends AppCompatActivity
         }
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
-        logDebug("username  "+channel);
-        logDebug("Latitude:  "+mLastLocation.getLatitude()+"\n Longitutde:  "+mLastLocation.getLongitude());
+        logDebug("username  " + channel);
+        logDebug("Latitude:  " + mLastLocation.getLatitude() + "\n Longitutde:  " + mLastLocation.getLongitude());
 //        if (phone.length() == 10) {
 //            phone = "+92" + phone;
 //        } else {
 //            phone = "+92" + phone.substring(1);
 //        }
-        logDebug("StdId :  "+channel + "     " +mLastLocation.getLongitude()   +"     "+mLastLocation.getLatitude()  +"   "+  type_course_st.getText().toString());
+        logDebug("StdId :  " + channel + "     " + mLastLocation.getLongitude() + "     " + mLastLocation.getLatitude() + "   " + type_course_st.getText().toString());
         AndroidNetworking.get(URLStudents.URL_SendRequest2Tutor)
                 .addQueryParameter("studentId", channel)
-                .addQueryParameter("longitude",""+ mLastLocation.getLongitude())
-                .addQueryParameter("latitude", ""+mLastLocation.getLatitude())
+                .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
+                .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
                 .addQueryParameter("courses", type_course_st.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.HIGH)
@@ -516,7 +544,7 @@ public class MainAppScreen extends AppCompatActivity
                         String message = "";
 
                         try {
-                            logDebug("Response  :  "+response);
+                            logDebug("Response  :  " + response);
                             message = response.getString("message");
                             error = response.getBoolean("error");
                         } catch (JSONException e) {
@@ -524,17 +552,15 @@ public class MainAppScreen extends AppCompatActivity
                         }
 
 
-                        if(!error)
-                        {
-                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
-                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(MainAppScreen.this,""+phone,Toast.LENGTH_LONG).show();
-                            Toast.makeText(MainAppScreen.this,""+message,Toast.LENGTH_LONG).show();
+                        if (!error) {
+                            Toast.makeText(MainAppScreen.this, "" + phone, Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this, "" + message, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MainAppScreen.this, "" + phone, Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainAppScreen.this, "" + message, Toast.LENGTH_LONG).show();
                         }
                     }
+
                     @Override
                     public void onError(ANError error) {
                         // handle error
@@ -542,6 +568,17 @@ public class MainAppScreen extends AppCompatActivity
 
                     }
                 });
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        int pos = mHashMap.get(marker);
+        JSONObject tutor = hashMapTutors.get(pos);
+
+        CustomDialogClass dialogClass = new CustomDialogClass(this,tutor);
+        dialogClass.show();
+        Log.i("Position of arraylist", pos + "");
+        return false;
     }
     //_________________________________________________//
 }
