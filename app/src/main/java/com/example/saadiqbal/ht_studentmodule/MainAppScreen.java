@@ -420,7 +420,7 @@ public class MainAppScreen extends AppCompatActivity
         switch (view.getId()) {
             case R.id.tutorviewmain:
 
-                CustomDialogClass cdd1 = new CustomDialogClass(this,new JSONObject());
+                CustomDialogClass cdd1 = new CustomDialogClass(this, new JSONObject());
                 cdd1.show();
                 break;
         }
@@ -575,7 +575,7 @@ public class MainAppScreen extends AppCompatActivity
         int pos = mHashMap.get(marker);
         JSONObject tutor = hashMapTutors.get(pos);
 
-        CustomDialogClass dialogClass = new CustomDialogClass(this,tutor);
+        CustomDialogClass dialogClass = new CustomDialogClass(this, tutor);
         dialogClass.show();
         Log.i("Position of arraylist", pos + "");
         return false;

@@ -7,9 +7,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-
-android:layout_gravity="center"        >
+        android:layout_marginTop="20dp"
+        >
 
         <ImageView
             android:id="@+id/img_tutor"
@@ -67,33 +68,35 @@ android:layout_gravity="center"        >
             android:textSize="15sp" />
 
 
-
     </RelativeLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-    <android.support.v7.widget.AppCompatRatingBar
-        style="?android:attr/ratingBarStyleIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/tv_salary"
-        android:numStars="5"
-        android:rating="2.0"
-        android:stepSize="1.0" />
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sendreq"
-        android:text="Send Request"
-        android:layout_alignTop="@+id/tv_timing"
-        android:layout_toEndOf="@+id/tv_qualification"
-        android:layout_toRightOf="@+id/tv_qualification" />
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatRatingBar
+            style="?android:attr/ratingBarStyleIndicator"
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/tv_salary"
+            android:numStars="5"
+            android:rating="5.0"
+            android:stepSize="1.0" />
+
+        <Button
+            android:id="@+id/sendreq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_timing"
+            android:layout_toEndOf="@+id/tv_qualification"
+            android:layout_toRightOf="@+id/tv_qualification"
+            android:text="Send Request" />
 
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>
