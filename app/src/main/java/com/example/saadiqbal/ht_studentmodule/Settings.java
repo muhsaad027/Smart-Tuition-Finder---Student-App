@@ -24,24 +24,26 @@ import org.json.JSONObject;
 import java.util.Set;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
-TextView tv_name,tv_email,tv_phno;
+    TextView tv_name, tv_email, tv_phno;
     Button id_logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.settingstoolbar);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.settingstoolbar);
         toolbar.setTitle("Settings");
         toolbar.setTitleTextColor(getResources().getColor(R.color.toolbartextcolor));
-        setSupportActionBar(toolbar);
-        tv_name =(TextView) findViewById(R.id.tv_name_setting);
-        tv_email = (TextView)findViewById(R.id.tv_emails_setting);
-        tv_phno = (TextView)findViewById(R.id.tv_phno_setting);
+        setSupportActionBar(toolbar);*/
+        tv_name = (TextView) findViewById(R.id.tv_name_setting);
+        tv_email = (TextView) findViewById(R.id.tv_emails_setting);
+        tv_phno = (TextView) findViewById(R.id.tv_phno_setting);
         id_logout = (Button) findViewById(R.id.id_logout);
         id_logout.setOnClickListener(this);
 
         datasend();
     }
+
     public void datasend() {
         AndroidNetworking.get(URLStudents.URL_Settings)
                 .addQueryParameter("pMobile", "03313844515")
@@ -55,11 +57,9 @@ TextView tv_name,tv_email,tv_phno;
 
                         try {
                             JSONArray jsonArray = response.getJSONArray("student");
-                            for(int i = 0 ; i < jsonArray.length() ; i++)
-                            {
+                            for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject item = jsonArray.getJSONObject(i);
-
 
 
                                 String name = item.getString("StdName");
@@ -95,12 +95,12 @@ TextView tv_name,tv_email,tv_phno;
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.id_logout:
                 SharedPreferences settings = getSharedPreferences("preferences", Context.MODE_PRIVATE);
                 settings.edit().clear().commit();
                 finish();
-                Intent intent = new Intent(this,AfterSlpash.class);
+                Intent intent = new Intent(this, AfterSlpash.class);
                 startActivity(intent);
                 break;
         }
