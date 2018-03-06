@@ -28,17 +28,30 @@
         android:layout_alignStart="@+id/linearLayout"
         android:layout_marginRight="12dp"
         >
-        <EditText
-            android:id="@+id/type_course"
+        <AutoCompleteTextView
+
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:id="@+id/searchAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="search by course"
-            android:padding="15dp"
-            android:singleLine="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:drawablePadding="15dp"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-           />
+            android:hint="search Courses"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoComplete|textAutoCorrect"></AutoCompleteTextView>
+        <!--<EditText
+        android:id="@+id/type_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="search by course"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:layout_weight="1"
+        android:drawablePadding="15dp"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        />-->
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

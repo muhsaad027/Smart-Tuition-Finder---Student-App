@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -59,6 +60,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.example.saadiqbal.ht_studentmodule.Login.PREF_UNAME;
@@ -69,6 +71,8 @@ public class MainAppScreen extends AppCompatActivity
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
+    final ArrayList<String> autofillcoursesDB = new ArrayList<String>();
+    AutoCompleteTextView autoCompleteTextView;
     Location mLastLocation;
     Marker mCurrLocationMarker;
     public String search_course;
@@ -77,7 +81,6 @@ public class MainAppScreen extends AppCompatActivity
     public TextView t1, t2, nummm;
     public String phone;
     public Button tutorReq, serach, cencelfragrequest;
-    public EditText type_course_st;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     public String Longitude, Latitude;
@@ -89,7 +92,8 @@ public class MainAppScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        type_course_st = (EditText) findViewById(R.id.type_course);
+        autoCompleteTextView = (AutoCompleteTextView)  findViewById(R.id.searchAutoComplete);
+        AutoCourseFillData();
         setSupportActionBar(toolbar);
 
 
@@ -97,12 +101,12 @@ public class MainAppScreen extends AppCompatActivity
         serach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type_course_st != null) {
+                if (autoCompleteTextView != null) {
 
                 }
-                if (type_course_st.getText().toString().isEmpty()) {
-                    type_course_st.setError("Phone number is required!");
-                    requestFocus(type_course_st);
+                if (autoCompleteTextView.getText().toString().isEmpty()) {
+                    autoCompleteTextView.setError("Coures name is required!");
+                    requestFocus(autoCompleteTextView);
                     return;
                 }
                 datasend();
@@ -232,6 +236,8 @@ public class MainAppScreen extends AppCompatActivity
             startActivity(iaa);
 
         } else if (id == R.id.HELP) {
+            Intent n = new Intent(MainAppScreen.this,testcoursesautocompelete.class);
+            startActivity(n);
 
         } else if (id == R.id.SETTINGS) {
             Intent iaa = new Intent(this, Settings.class);
@@ -449,7 +455,7 @@ public class MainAppScreen extends AppCompatActivity
                 .addQueryParameter("studentId", channel)
                 .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
                 .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
-                .addQueryParameter("courses", "" + type_course_st.getText().toString())
+                .addQueryParameter("courses", "" + autoCompleteTextView.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -528,12 +534,12 @@ public class MainAppScreen extends AppCompatActivity
 //        } else {
 //            phone = "+92" + phone.substring(1);
 //        }
-        logDebug("StdId :  " + channel + "     " + mLastLocation.getLongitude() + "     " + mLastLocation.getLatitude() + "   " + type_course_st.getText().toString());
+        logDebug("StdId :  " + channel + "     " + mLastLocation.getLongitude() + "     " + mLastLocation.getLatitude() + "   " + autoCompleteTextView.getText().toString());
         AndroidNetworking.get(URLStudents.URL_SendRequest2Tutor)
                 .addQueryParameter("studentId", channel)
                 .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
                 .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
-                .addQueryParameter("courses", type_course_st.getText().toString())
+                .addQueryParameter("courses", autoCompleteTextView.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.HIGH)
                 .build()
@@ -581,4 +587,43 @@ public class MainAppScreen extends AppCompatActivity
         return false;
     }
     //_________________________________________________//
+    public void AutoCourseFillData() {
+
+
+
+        AndroidNetworking.get(URLStudents.URL_AutoFillCourses)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        boolean error = false;
+                        String message = "";
+
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("result");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject item = jsonArray.getJSONObject(i);
+                                autofillcoursesDB.add(item.getString("CourseName"));
+                                AutoCompleteAdapter adapter = new AutoCompleteAdapter(MainAppScreen.this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, autofillcoursesDB);
+                                autoCompleteTextView.setAdapter(adapter);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error4
+                        Toast.makeText(MainAppScreen.this, "" + error, Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+
+    }
 }
