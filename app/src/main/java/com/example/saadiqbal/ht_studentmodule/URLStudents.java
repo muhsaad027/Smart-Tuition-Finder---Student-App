@@ -18,6 +18,10 @@ public class URLStudents {
     public static final String URL_StudentFCMupdate ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/updateStudent_FCMKey";
     public static final String URL_TutorGetInfo ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/getNearestTutor";
     public static final String URL_AutoFillCourses ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/CoursesAutoFill";
+    public static final String URL_StrudnetRequestCencel ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/cencelRequestStudent";
+    public static final String URL_StudentCourses ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/StudentCourse";
+
+
 
 
     public  static  String getPhoneNo (Context context)

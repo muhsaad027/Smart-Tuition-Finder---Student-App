@@ -122,14 +122,7 @@ public class MainAppScreen extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 reqsend();
-                RequestFragment rf = new RequestFragment();
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
 
-                ft.setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
-                ft.replace(R.id.mainappcontainer, rf);
-
-                ft.commit();
                 //Toast.makeText(getBaseContext(), "Request Cencel",Toast.LENGTH_LONG).show();
                /* Intent intent = new Intent(MainAppScreen.this,RequsetProgress.class);
                 startActivity(intent);
@@ -228,7 +221,7 @@ public class MainAppScreen extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.COURSES) {
 
-            Intent ia = new Intent(this, Course.class);
+            Intent ia = new Intent(this, CurrentTuitons.class);
             startActivity(ia);
 
         } else if (id == R.id.FAQS) {
@@ -548,19 +541,37 @@ public class MainAppScreen extends AppCompatActivity
                     public void onResponse(JSONObject response) {
                         boolean error = false;
                         String message = "";
+                        String reqID = "";
+
+
 
                         try {
+                            JSONArray tutorArray = response.getJSONArray("result");
+                            JSONObject tutorObject = tutorArray.getJSONObject(0);
+
+                            reqID = tutorObject.getString("requestId");
+                            // reqID
+                            //
                             logDebug("Response  :  " + response);
-                            message = response.getString("message");
-                            error = response.getBoolean("error");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
 
-                        if (!error) {
-                            Toast.makeText(MainAppScreen.this, "" + phone, Toast.LENGTH_LONG).show();
-                            Toast.makeText(MainAppScreen.this, "" + message, Toast.LENGTH_LONG).show();
+                        if (!reqID.equals("")) {
+                            RequestFragment rf = new RequestFragment();
+                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+
+                            Bundle args = new Bundle();
+                            args.putString("reqID",reqID);
+                            rf.setArguments(args);
+                            ft.setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
+                            ft.replace(R.id.mainappcontainer, rf);
+
+
+                            ft.commit();
                         } else {
                             Toast.makeText(MainAppScreen.this, "" + phone, Toast.LENGTH_LONG).show();
                             Toast.makeText(MainAppScreen.this, "" + message, Toast.LENGTH_LONG).show();

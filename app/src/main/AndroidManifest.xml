@@ -82,7 +82,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".testcoursesautocompelete"></activity>
+        <activity android:name=".testcoursesautocompelete" />
+        <activity
+            android:name=".CurrentTuitons"
+            android:label="@string/title_activity_current_tuitons"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
