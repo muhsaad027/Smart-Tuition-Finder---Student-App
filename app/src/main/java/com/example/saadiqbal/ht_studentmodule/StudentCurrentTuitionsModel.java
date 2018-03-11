@@ -16,6 +16,15 @@ import org.json.JSONObject;
 
 public class StudentCurrentTuitionsModel {
     public String TutName, TutPhone, TutQual, CourseName, TutorRating;
+    public Integer ReqID;
+
+    public Integer getReqID() {
+        return ReqID;
+    }
+
+    public void setReqID(Integer reqID) {
+        ReqID = reqID;
+    }
 
     public String getStudentID() {
         return TutName;
@@ -72,6 +81,7 @@ public class StudentCurrentTuitionsModel {
             this.TutQual = jsonObject.getString("TutQual");
             this.CourseName = jsonObject.getString("CourseName");
             this.TutorRating = jsonObject.getString("TutorRating");
+            this.ReqID = jsonObject.getInt("idRequest");
 
         }
         catch (JSONException e) {

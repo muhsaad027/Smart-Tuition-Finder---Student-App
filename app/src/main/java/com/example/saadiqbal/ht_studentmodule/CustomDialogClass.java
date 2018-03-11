@@ -2,7 +2,12 @@ package com.example.saadiqbal.ht_studentmodule;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -10,28 +15,45 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CustomDialogClass extends Dialog {
+public class CustomDialogClass extends Dialog implements View.OnClickListener {
 
+    public static final String PREFS_NAME = "preferences";
+    public static final String PREF_UNAME = "Username";
     public Activity c;
     public Dialog d;
     public Button reqsent;
     JSONObject tutor;
     public TextView t1, t2, t3, t4, t5;
     public RatingBar r;
+    double lonitude ,latitude;
+    String courses;
 
-
-    public CustomDialogClass(Activity a, JSONObject jsonObject) {
+    public CustomDialogClass(Activity a, JSONObject jsonObject,double longitude,double latitude,String courses) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
         this.tutor = jsonObject;
-
-
+        this.lonitude = longitude;
+        this.latitude = latitude;
+        this.courses = courses;
     }
 
+    public CustomDialogClass(Activity a, JSONObject jsonObject)
+    {
+        super(a);
+        // TODO Auto-generated constructor stub
+        this.c = a;
+        this.tutor = jsonObject;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +89,61 @@ public class CustomDialogClass extends Dialog {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        reqsent.setOnClickListener(this);
 
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.sendreq:
+                reqsend();
+                Toast.makeText(c,"in cuuss ",Toast.LENGTH_LONG).show();
+                break;
+        }
+    }
+    public void reqsend() {
+        String phone =  loadPreferences();
+        try {
+            AndroidNetworking.get(URLStudents.URL_CustomizeRequestTutor)
+                .addQueryParameter("studentId", phone)
+                .addQueryParameter("longitude", "" + lonitude)
+                .addQueryParameter("latitude", "" +latitude)
+                .addQueryParameter("courses", courses)
+                    .addQueryParameter("tutorId",tutor.getString("TutPhone"))
+                .setTag("test")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        boolean error = false;
+                        String message = "";
+                        String reqID = "";
+
+                        }
+
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+                    }
+                });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private String loadPreferences() {
+
+        String tutphone;
+        SharedPreferences settings;
+        settings = c.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+
+        // Get value
+        tutphone = settings.getString(PREF_UNAME, "");
+        return tutphone;
+    }
 }

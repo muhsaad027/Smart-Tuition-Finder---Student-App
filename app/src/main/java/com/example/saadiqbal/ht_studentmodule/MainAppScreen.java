@@ -592,7 +592,7 @@ public class MainAppScreen extends AppCompatActivity
         int pos = mHashMap.get(marker);
         JSONObject tutor = hashMapTutors.get(pos);
 
-        CustomDialogClass dialogClass = new CustomDialogClass(this, tutor);
+        CustomDialogClass dialogClass = new CustomDialogClass(this, tutor,mLastLocation.getLongitude(),mLastLocation.getLatitude(),autoCompleteTextView.getText().toString());
         dialogClass.show();
         Log.i("Position of arraylist", pos + "");
         return false;

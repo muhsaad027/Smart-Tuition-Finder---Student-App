@@ -20,6 +20,10 @@ public class URLStudents {
     public static final String URL_AutoFillCourses ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/CoursesAutoFill";
     public static final String URL_StrudnetRequestCencel ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/cencelRequestStudent";
     public static final String URL_StudentCourses ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/StudentCourse";
+    public static final String URL_FinishTuition ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/finishTuition";
+    public static final String URL_CustomizeRequestTutor ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/customizeSendRequestTutor";
+
+    //http://hometuition.ahmedgraf.com/HomeTuition/Test1/customizeSendRequestTutor
 
 
 
