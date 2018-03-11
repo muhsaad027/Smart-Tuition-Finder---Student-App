@@ -49,8 +49,8 @@ public class CurrentTuitons extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CurrentTutionStudent(), "Current");
-        adapter.addFragment(new CurrentTutionStudent(), "Cancelled");
-        adapter.addFragment(new CurrentTutionStudent(), "Complete");
+        adapter.addFragment(new CancelledTuitionStudent(), "Cancelled");
+        adapter.addFragment(new CompleteTuitionStudent(), "Complete");
 
         viewPager.setAdapter(adapter);
     }

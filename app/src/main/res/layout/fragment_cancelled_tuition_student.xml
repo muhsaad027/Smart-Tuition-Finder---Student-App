@@ -2,12 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.saadiqbal.ht_studentmodule.CurrentTutionStudent">
+    tools:context="com.example.saadiqbal.ht_studentmodule.CancelledTuitionStudent">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_order_cancel"
+        android:id="@+id/rv_Tuitions_Real_cancel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
     </android.support.v7.widget.RecyclerView>
+
 
 </FrameLayout>
