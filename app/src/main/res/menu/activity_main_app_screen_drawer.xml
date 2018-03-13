@@ -7,7 +7,7 @@
             android:title="INBOX" />
         <item
             android:id="@+id/COURSES"
-            android:title="COURSES" />
+            android:title="My Tuitions" />
         <item
             android:id="@+id/FAQS"
             android:title="FAQS" />

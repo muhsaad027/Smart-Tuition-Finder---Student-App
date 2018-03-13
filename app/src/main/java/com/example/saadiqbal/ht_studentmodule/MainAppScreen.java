@@ -229,8 +229,7 @@ public class MainAppScreen extends AppCompatActivity
             startActivity(iaa);
 
         } else if (id == R.id.HELP) {
-            Intent n = new Intent(MainAppScreen.this,testcoursesautocompelete.class);
-            startActivity(n);
+
 
         } else if (id == R.id.SETTINGS) {
             Intent iaa = new Intent(this, Settings.class);
