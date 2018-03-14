@@ -429,6 +429,8 @@ public class MainAppScreen extends AppCompatActivity
     }
 
     public void datasend() {
+
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -437,6 +439,8 @@ public class MainAppScreen extends AppCompatActivity
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
         logDebug("username  " + channel);
+        logDebug("courses  " +autoCompleteTextView.getText().toString());
+        String temp = autoCompleteTextView.getText().toString();
         logDebug("Latitude:  " + mLastLocation.getLatitude() + "\n Longitutde:  " + mLastLocation.getLongitude());
 //        if (phone.length() == 10) {
 //            phone = "+92" + phone;
@@ -456,7 +460,7 @@ public class MainAppScreen extends AppCompatActivity
                     public void onResponse(JSONObject response) {
                         boolean error = false;
                         String message = "";
-
+logDebug("Response :  "+response);
                         try {
                             logDebug("Response  :  " + response);
                             JSONArray tutorArray = response.getJSONArray("result");
@@ -519,7 +523,9 @@ public class MainAppScreen extends AppCompatActivity
         }
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
+
         logDebug("username  " + channel);
+        logDebug("courses  " + autoCompleteTextView.getText().toString());
         logDebug("Latitude:  " + mLastLocation.getLatitude() + "\n Longitutde:  " + mLastLocation.getLongitude());
 //        if (phone.length() == 10) {
 //            phone = "+92" + phone;

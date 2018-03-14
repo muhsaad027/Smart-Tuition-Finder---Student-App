@@ -19,11 +19,12 @@ import java.util.ArrayList;
 public class testcoursesautocompelete extends AppCompatActivity {
     final ArrayList<String> autofillcoursesDB = new ArrayList<String>();
     AutoCompleteTextView autoCompleteTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testcoursesautocompelete);
-        autoCompleteTextView = (AutoCompleteTextView)  findViewById(R.id.searchAutoComplete);
+        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchAutoComplete);
         datasend();
        /*
         AutoCompleteAdapter adapter = new AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, searchArrayList);
@@ -32,7 +33,6 @@ public class testcoursesautocompelete extends AppCompatActivity {
     }
 
     public void datasend() {
-
 
 
         AndroidNetworking.get(URLStudents.URL_AutoFillCourses)
@@ -50,8 +50,9 @@ public class testcoursesautocompelete extends AppCompatActivity {
 
                                 JSONObject item = jsonArray.getJSONObject(i);
                                 autofillcoursesDB.add(item.getString("CourseName"));
-        AutoCompleteAdapter adapter = new AutoCompleteAdapter(testcoursesautocompelete.this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, autofillcoursesDB);
-        autoCompleteTextView.setAdapter(adapter);
+                                AutoCompleteAdapter adapter = new AutoCompleteAdapter(testcoursesautocompelete.this, android.R.layout.simple_list_item_1, android.R.id.text1, autofillcoursesDB );
+                                autoCompleteTextView.setAdapter(adapter);
+
                             }
 
                         } catch (JSONException e) {
@@ -66,7 +67,6 @@ public class testcoursesautocompelete extends AppCompatActivity {
 
                     }
                 });
-
 
 
     }
