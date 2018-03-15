@@ -32,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,6 +79,7 @@ public class MainAppScreen extends AppCompatActivity
     public String search_course;
     public String contact;
     private GoogleMap mMap;
+    LinearLayout ll_rec , ll_datares;
     public TextView t1, t2, nummm;
     public String phone;
     public Button tutorReq, serach, cencelfragrequest;
@@ -102,14 +104,14 @@ public class MainAppScreen extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (autoCompleteTextView != null) {
-
+                    datasend();
                 }
                 if (autoCompleteTextView.getText().toString().isEmpty()) {
                     autoCompleteTextView.setError("Coures name is required!");
                     requestFocus(autoCompleteTextView);
                     return;
                 }
-                datasend();
+
                 /*CustomDialogClass cdd=new CustomDialogClass(MainAppScreen.this);
                 cdd.show();*/
 
@@ -121,7 +123,15 @@ public class MainAppScreen extends AppCompatActivity
         tutorReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reqsend();
+                if (autoCompleteTextView != null) {
+
+                    reqsend();
+                }
+                if (autoCompleteTextView.getText().toString().isEmpty()) {
+                    autoCompleteTextView.setError("You must select the course!");
+                    requestFocus(autoCompleteTextView);
+                    return;
+                }
 
                 //Toast.makeText(getBaseContext(), "Request Cencel",Toast.LENGTH_LONG).show();
                /* Intent intent = new Intent(MainAppScreen.this,RequsetProgress.class);
@@ -153,6 +163,13 @@ public class MainAppScreen extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
+        ll_datares = (LinearLayout)findViewById(R.id.ll_datares);
+        ll_rec = (LinearLayout) findViewById(R.id.ll_rec);
+
+        ll_datares.setVisibility(View.GONE);
+        ll_rec.setVisibility(View.VISIBLE);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -321,12 +338,16 @@ public class MainAppScreen extends AppCompatActivity
         logDebug("OnNewIntent called");
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
+            ll_datares.setVisibility(View.VISIBLE);
+            ll_rec.setVisibility(View.GONE);
             contact = bundle.getString("phoneNo");
             String type = bundle.getString("type");
             String name = bundle.getString("title");
             logDebug("Name" + name);
             t1.setText("Status : Available\n" + name + "\nType : " + type);
             nummm.setText(contact);
+
+
         }
     }
 
@@ -342,7 +363,7 @@ public class MainAppScreen extends AppCompatActivity
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.iamstudentpin));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
@@ -476,7 +497,7 @@ logDebug("Response :  "+response);
 
                                 markerOptions.position(latLng);
                                 markerOptions.title("" + name);
-                                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.tutorpin));
                                 markerOptions.snippet(TutPhone);
 
                                 Marker marker = mMap.addMarker(markerOptions);

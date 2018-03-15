@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainappcontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainappcontainer"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.saadiqbal.ht_studentmodule.MainAppScreen"
     tools:showIn="@layout/app_bar_main_app_screen">
@@ -21,22 +21,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:layout_marginTop="12dp"
-        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/linearLayout"
         android:layout_marginRight="12dp"
-        >
+        android:layout_marginTop="12dp"
+        android:background="#fff">
+
         <AutoCompleteTextView
 
-            android:drawableLeft="@drawable/ic_search_black_24dp"
             android:id="@+id/searchAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
             android:hint="search Courses"
             android:imeOptions="actionSearch"
             android:inputType="textAutoComplete|textAutoCorrect"></AutoCompleteTextView>
@@ -53,53 +53,44 @@
         />-->
 
         <Button
+            android:id="@+id/search_butons"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="search"
-            android:textColor="#fff"
             android:background="#160f29"
-            android:id="@+id/search_butons"
-            />
+            android:text="search"
+            android:textColor="#fff" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="225dp"
-        android:clickable="true"
-        android:background="#fff"
-        android:orientation="vertical"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#fff"
+        android:clickable="true"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="45dp"
             android:background="#160f29"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                android:text="Find Tutor"
-                android:textColor="#fff"
-                android:textAlignment="center"
-
-                />
-        </LinearLayout>
+            android:clickable="false"
+            android:text="Find Tutor"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_weight="1">
-
+            android:id="@+id/ll_datares"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tutorviewmain"
@@ -107,39 +98,101 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:textAlignment="center"
                 android:padding="10dp"
-                android:textSize="17sp"/>
+                android:textAlignment="center"
+                android:textSize="17sp" />
+
             <TextView
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:autoLink="phone"
+                android:clickable="true"
                 android:textAlignment="center" />
 
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button
-                android:id="@+id/reqtutor"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ll_rec"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="#160f29"
-                android:text="Request Tutor"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="2dp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/people"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recommendation"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingbar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    android:paddingTop="5dp"
+                    android:rating="5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\nFind The best match\nTutor for you"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
+
+        <Button
+            android:id="@+id/reqtutor"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:background="#160f29"
+            android:text="Request Tutor"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </RelativeLayout>
