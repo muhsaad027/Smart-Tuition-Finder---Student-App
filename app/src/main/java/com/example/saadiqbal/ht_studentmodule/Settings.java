@@ -26,7 +26,8 @@ import java.util.Set;
 public class Settings extends AppCompatActivity implements View.OnClickListener {
     TextView tv_name, tv_email, tv_phno;
     Button id_logout;
-
+    public static final String PREFS_NAME = "preferences";
+    public static final String PREF_UNAME = "Username";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +46,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void datasend() {
+        String phone =  loadPreferences();
         AndroidNetworking.get(URLStudents.URL_Settings)
-                .addQueryParameter("pMobile", "03313844515")
+
+                .addQueryParameter("pMobile", phone)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -104,5 +107,16 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 startActivity(intent);
                 break;
         }
+    }
+    private String loadPreferences() {
+
+        String tutphone;
+        SharedPreferences settings;
+        settings = this.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+
+        // Get value
+        tutphone = settings.getString(PREF_UNAME, "");
+        return tutphone;
     }
 }
