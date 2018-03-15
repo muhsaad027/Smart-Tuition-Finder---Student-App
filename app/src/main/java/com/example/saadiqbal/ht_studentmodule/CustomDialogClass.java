@@ -30,7 +30,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public static final String PREF_UNAME = "Username";
     public Activity c;
     public Dialog d;
-    public Button reqsent;
+    public Button reqsent,cancel;
     JSONObject tutor;
     public TextView t1, t2, t3, t4, t5;
     public RatingBar r;
@@ -67,6 +67,13 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         Latitude
         CourseName
          */
+        cancel = (Button) findViewById(R.id.cencelreqestdai);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         reqsent = (Button) findViewById(R.id.sendreq);
         t1 = (TextView) findViewById(R.id.tv_tutor_name);
         t2 = (TextView)findViewById(R.id.tv_qualification);
@@ -99,7 +106,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         switch (view.getId()){
             case R.id.sendreq:
                 reqsend();
-                Toast.makeText(c,"in cuuss ",Toast.LENGTH_LONG).show();
+                dismiss();
                 break;
         }
     }
