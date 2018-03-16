@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/INBOX"
-            android:title="INBOX" />
+        <!--<item-->
+            <!--android:id="@+id/INBOX"-->
+            <!--android:title="INBOX" />-->
         <item
             android:id="@+id/COURSES"
-            android:title="My Tuitions" />
-        <item
-            android:id="@+id/FAQS"
-            android:title="FAQS" />
-        <item
-            android:id="@+id/HELP"
-            android:title="HELP" />
+            android:title="MY TUITION" />
+        <!--<item-->
+            <!--android:id="@+id/FAQS"-->
+            <!--android:title="FAQS" />-->
+        <!--<item-->
+            <!--android:id="@+id/HELP"-->
+            <!--android:title="HELP" />-->
         <item
             android:id="@+id/SETTINGS"
             android:title="SETTINGS" />

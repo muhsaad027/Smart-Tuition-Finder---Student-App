@@ -231,24 +231,26 @@ public class MainAppScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.INBOX) {
-            // Handle the camera action
-
-            Intent i = new Intent(this, InboxActivity.class);
-            startActivity(i);
-        } else if (id == R.id.COURSES) {
+//        if (id == R.id.INBOX) {
+//            // Handle the camera action
+//
+//            Intent i = new Intent(this, InboxActivity.class);
+//            startActivity(i);}
+        if (id == R.id.COURSES) {
 
             Intent ia = new Intent(this, CurrentTuitons.class);
             startActivity(ia);
+}
+//else if (id == R.id.FAQS) {
+//            Intent iaa = new Intent(this, FAQs.class);
+//            startActivity(iaa);
 
-        } else if (id == R.id.FAQS) {
-            Intent iaa = new Intent(this, FAQs.class);
-            startActivity(iaa);
-
-        } else if (id == R.id.HELP) {
+//        }
+//        else if (id == R.id.HELP) {
 
 
-        } else if (id == R.id.SETTINGS) {
+//        }
+        else if (id == R.id.SETTINGS) {
             Intent iaa = new Intent(this, Settings.class);
             startActivity(iaa);
 
