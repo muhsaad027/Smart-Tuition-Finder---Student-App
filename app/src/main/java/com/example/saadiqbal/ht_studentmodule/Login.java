@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,6 +32,7 @@ import static junit.runner.BaseTestRunner.savePreferences;
 
 public class Login extends AppCompatActivity {
 Button loginpage;
+
     //////////////////////
     public static final String PREFS_NAME = "preferences";
     public static final String PREF_UNAME = "Username";
@@ -43,10 +45,21 @@ Button loginpage;
     private String PasswordValue;
     ////////////////////
     EditText loginusername,loginpass;
+    private Button ButtonInvisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButtonInvisible = (Button)findViewById(R.id.show_pass);
+        ButtonInvisible.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                loginpass.setTransformationMethod(null);
+            }
+        });
+
 
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
@@ -137,6 +150,8 @@ Button loginpage;
                         else
                         {
                             Toast.makeText(Login.this,""+message,Toast.LENGTH_LONG).show();
+                            CustomizePopUpLayout n = new CustomizePopUpLayout();
+                            n.RangeRadius(Login.this,"Username and Password is incorrect\n\n*Check Internet Connection");
                         }
                     }
                     @Override

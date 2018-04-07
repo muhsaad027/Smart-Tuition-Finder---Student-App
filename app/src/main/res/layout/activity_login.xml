@@ -7,61 +7,162 @@
     tools:context="com.example.saadiqbal.ht_studentmodule.Login"
     android:background="#160f29"
     android:orientation="vertical"
-    android:weightSum="1">
-    <ImageView
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@drawable/logo"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"/>
+    android:weightSum="3">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="80dp"
-        android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
+        android:layout_weight="0.9"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:background="#FF246A72"
+            >
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:background="#fff"
         >
+
         <EditText
             android:id="@+id/loginusername"
+            android:drawableLeft="@drawable/celicon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:maxLines="1"
-            android:hint="enter phone number"
-            android:inputType="number"
-            android:layout_marginTop="50dp"
+            android:hint="UserID ( e.g 03313844515 )"
+            android:inputType="phone"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             />
-        <EditText
-            android:id="@+id/loginpass"
-            android:layout_width="match_parent"
+
+        <!--<EditText-->
+            <!--android:id="@+id/loginpass"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:layout_marginRight="50dp"-->
+            <!--android:drawableLeft="@drawable/passwordicon"-->
+            <!--android:drawableRight="@drawable/visible"-->
+            <!--android:hint=" User Password"-->
+            <!--android:inputType="textPassword"-->
+            <!--android:maxLines="1"-->
+            <!--android:paddingTop="15dp"-->
+            <!--android:password="true"-->
+            <!--android:singleLine="true" />-->
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="password"
-            android:password="true"
-            android:paddingTop="15dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" >
+
+            <EditText
+                android:id="@+id/loginpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/visible"
+                android:drawableLeft="@drawable/passwordicon"
+                android:ems="13"
+                android:hint="User Passowrd"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingTop="15dp"
+                android:password="true"
+                android:singleLine="true"
+                />
+
+            <Button
+                android:id="@+id/show_pass"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:text=" "
+                android:background="?android:attr/selectableItemBackground"
+                />
+        </FrameLayout>
+
         <Button
             android:id="@+id/loginb1"
-            android:background="@drawable/buttton"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#160f29"
+            android:background="@drawable/mybutton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+
+
             android:text="LOGIN"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#ffff"
             android:layout_gravity="center"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget your password?"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have account? Create Account"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#246a72">
+        android:layout_weight="1.4"
+        android:orientation="vertical"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FF246A72"
+            >
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Copyright © 2018, Home Tuition"
+            android:textColor="#fff"
+            android:gravity="center"
+            />
 
     </LinearLayout>
-</LinearLayout>
+
+   </LinearLayout>
