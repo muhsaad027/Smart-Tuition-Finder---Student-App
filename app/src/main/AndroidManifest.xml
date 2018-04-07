@@ -86,7 +86,8 @@
         <activity
             android:name=".CurrentTuitons"
             android:label="@string/title_activity_current_tuitons"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".CustomizePopUpLayout"></activity>
     </application>
 
 </manifest>

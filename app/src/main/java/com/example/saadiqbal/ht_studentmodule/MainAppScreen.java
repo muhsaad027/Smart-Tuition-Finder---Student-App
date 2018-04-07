@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,13 +89,39 @@ public class MainAppScreen extends AppCompatActivity
     public String Longitude, Latitude;
     private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
     private HashMap<Integer, JSONObject> hashMapTutors = new HashMap<Integer, JSONObject>();
+    TextView Num;
+    SeekBar seekbar;
+    String seekbarValue;
+    int radius;
 
-    @Override
+
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         autoCompleteTextView = (AutoCompleteTextView)  findViewById(R.id.searchAutoComplete);
+            Num = (TextView)findViewById(R.id.textView1);
+            seekbar = (SeekBar)findViewById(R.id.seekbar);
+            seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                     seekbarValue = String.valueOf(i);
+
+                    Num.setText(seekbarValue);
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
         AutoCourseFillData();
         setSupportActionBar(toolbar);
 
@@ -470,10 +497,20 @@ public class MainAppScreen extends AppCompatActivity
 //        } else {
 //            phone = "+92" + phone.substring(1);
 //        }
+
+
+
+        Toast.makeText(MainAppScreen.this,""+seekbarValue,Toast.LENGTH_LONG).show();
+        if(seekbarValue == null )
+        {
+            seekbarValue = "1";
+            Toast.makeText(MainAppScreen.this,"if : "+seekbarValue,Toast.LENGTH_LONG).show();
+        }
         AndroidNetworking.get(URLStudents.URL_TutorGetInfo)
                 .addQueryParameter("studentId", channel)
                 .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
                 .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
+                .addQueryParameter("radius", String.valueOf(Integer.parseInt(seekbarValue)))
                 .addQueryParameter("courses", "" + autoCompleteTextView.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -665,4 +702,5 @@ logDebug("Response :  "+response);
 
 
     }
+
 }
