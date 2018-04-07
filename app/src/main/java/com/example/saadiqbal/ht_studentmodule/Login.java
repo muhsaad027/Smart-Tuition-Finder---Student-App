@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.LongSparseArray;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -32,6 +34,7 @@ import static junit.runner.BaseTestRunner.savePreferences;
 
 public class Login extends AppCompatActivity {
 Button loginpage;
+    TextView forgetpasswrod,createAnewAccount;
 
     //////////////////////
     public static final String PREFS_NAME = "preferences";
@@ -39,6 +42,7 @@ Button loginpage;
     public static final String PREF_PASSWORD = "Password";
     public String phone;
     private final String DefaultUnameValue = "";
+
     public String UnameValue;
 
     private final String DefaultPasswordValue = "";
@@ -52,6 +56,26 @@ Button loginpage;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButtonInvisible = (Button)findViewById(R.id.show_pass);
+        forgetpasswrod = (TextView)findViewById(R.id.forgetpass);
+        forgetpasswrod.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent n = new Intent(Login.this,ForgetPassword.class);
+                startActivity(n);
+                finish();
+            }
+        });
+        createAnewAccount = (TextView)findViewById(R.id.createaccount);
+        createAnewAccount.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent n = new Intent(Login.this,Signup.class);
+                startActivity(n);
+                finish();
+            }
+        });
         ButtonInvisible.setOnClickListener(new View.OnClickListener() {
 
             @Override

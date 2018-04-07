@@ -124,6 +124,7 @@
             android:layout_gravity="center"
             />
         <TextView
+            android:id="@+id/forgetpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Forget your password?"
@@ -131,6 +132,7 @@
             android:layout_marginTop="10dp"
             />
         <TextView
+            android:id="@+id/createaccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Don't have account? Create Account"
