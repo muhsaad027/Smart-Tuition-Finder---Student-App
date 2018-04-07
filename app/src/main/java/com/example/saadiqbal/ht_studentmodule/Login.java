@@ -121,10 +121,16 @@ Button loginpage;
             requestFocus(loginusername);
             return;
         }
-        if (loginpass.getText().toString().isEmpty())
+        else if (loginpass.getText().toString().isEmpty())
         {
             loginpass.setError("Password is required!");
             requestFocus(loginpass);
+            return;
+        }
+        else if (loginusername.getText().toString().trim()
+                        .length() < 11) {
+            loginusername.setError("Invalid Phone Number!");
+            requestFocus(loginusername);
             return;
         }
         Intent intent = new Intent(Login.this, MainAppScreen.class);
