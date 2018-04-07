@@ -1,6 +1,7 @@
 package com.example.saadiqbal.ht_studentmodule;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -111,6 +113,17 @@ public class MainAppScreen extends AppCompatActivity
 
                      seekbarValue = String.valueOf(i);
 
+                    if(i < 3)
+                    {
+                        CustomizePopUpLayout n = new CustomizePopUpLayout();
+                        n.RangeRadius(MainAppScreen.this,"Too much decrease of radius will\nmake it difficult to find\nTUTOR");
+                    }
+                    if(i > 7)
+                    {
+                        CustomizePopUpLayout n = new CustomizePopUpLayout();
+                        n.RangeRadius(MainAppScreen.this,"Too much increase of radius will\nmake effect the cost of\nTUITION");
+                    }
+
                     Num.setText(seekbarValue);
                 }
                 @Override
@@ -130,13 +143,19 @@ public class MainAppScreen extends AppCompatActivity
         serach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (autoCompleteTextView != null) {
-                    datasend();
-                }
+
                 if (autoCompleteTextView.getText().toString().isEmpty()) {
                     autoCompleteTextView.setError("Coures name is required!");
                     requestFocus(autoCompleteTextView);
                     return;
+                }
+                if (autoCompleteTextView != null) {
+                    CustomizePopUpLayout n = new CustomizePopUpLayout();
+                    n.RangeRadius(MainAppScreen.this,"We had just find best \n Tutors for YOU !\n* if not VISIBLE kindly increase\nRADUIS");
+                    View view = new View(MainAppScreen.this);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    datasend();
                 }
 
                 /*CustomDialogClass cdd=new CustomDialogClass(MainAppScreen.this);

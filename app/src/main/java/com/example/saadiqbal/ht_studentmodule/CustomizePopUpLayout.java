@@ -16,7 +16,7 @@ public class CustomizePopUpLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customize_pop_up_layout);
     }
-    public void Settings_Screen(Activity activity, String msg){
+    public void RangeRadius(Activity activity, String msg){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -24,8 +24,7 @@ public class CustomizePopUpLayout extends AppCompatActivity {
 
         TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
         text.setText(msg);
-        Button dialogButton2 = (Button) dialog.findViewById(R.id.ok_btn);
-        Button dialogButton = (Button) dialog.findViewById(R.id.cencel_btn);
+        Button dialogButton = (Button) dialog.findViewById(R.id.ok_btn);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

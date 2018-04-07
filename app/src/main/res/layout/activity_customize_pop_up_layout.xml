@@ -43,21 +43,11 @@
             android:text="OK"
             android:id="@+id/ok_btn"
             android:layout_gravity="center"
-            android:layout_marginRight="40dp"
             android:gravity="center_vertical|center_horizontal"
             android:background="@drawable/mybutton"
             android:layout_marginBottom="10dp"
             android:textColor="#ffffffff"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="Cancel"
-            android:id="@+id/cencel_btn"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            android:gravity="center_vertical|center_horizontal"
-            android:background="@drawable/mybutton"
-            android:textColor="#ffffffff" />
+
     </LinearLayout>
 
 
