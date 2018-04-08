@@ -4,33 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:weightSum="2"
     android:orientation="vertical">
 
-
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#160f29"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="64dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_sms_auth"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <TextView
+            android:id="@+id/textHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Authentification"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+            />
+    </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_weight="1.65"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#160f29"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="STEP 1"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:textStyle="bold"
+            android:layout_marginRight="1dp"
+            android:text="STEP 2"
+            android:layout_weight="1"
+            />
 
+    </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
+            android:background="#fff"
             android:layout_height="match_parent"
+            android:layout_weight="0.25"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="25dp">
@@ -72,10 +100,12 @@
 
             <Button
                 android:id="@+id/btn_verify"
-                android:background="#160f29"
+                android:background="@drawable/mybutton"
+                android:backgroundTint="#160f29"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+
                 android:text="Verify"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
@@ -91,6 +121,7 @@
                 android:id="@+id/btn_resend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/mybutton"
                 android:layout_marginTop="25dp"
                 android:text="Resend"
                 android:textColor="#FFFFFF"
@@ -99,5 +130,4 @@
 
 
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>

@@ -73,9 +73,6 @@ public class Authentication extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sms_auth);
-        toolbar.setTitle("Verification");
-        setSupportActionBar(toolbar);
 
 
         Intent intent = getIntent();
