@@ -18,24 +18,30 @@
         android:layout_width="match_parent"
         android:layout_height="435dp"
         android:background="#fff"
+        android:gravity="center"
         android:layout_marginTop="25dp"
         android:orientation="vertical"
         >
+
         <EditText
             android:id="@+id/name"
-            android:singleLine="true"
-            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Full Name"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/usernameicon"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
-            />
+            android:hint="Enter Full Name"
+            android:maxLines="1"
+            android:singleLine="true" />
+
         <EditText
             android:id="@+id/email"
             android:singleLine="true"
             android:maxLines="1"
+            android:drawableLeft="@drawable/emailicon"
+            android:drawablePadding="10dp"
             android:layout_width="match_parent"
             android:inputType="textEmailAddress"
             android:layout_height="wrap_content"
