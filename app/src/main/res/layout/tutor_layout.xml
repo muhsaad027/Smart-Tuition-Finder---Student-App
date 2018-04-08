@@ -56,6 +56,18 @@
             android:minLines="1"
             android:text="Timing: 5:00 - 7:00 pm"
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tv_tuitionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_qualification"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/img_tutor"
+            android:minLines="1"
+            android:text="Tuition Type: "
+            android:textSize="15sp"/>
+
 
         <TextView
 

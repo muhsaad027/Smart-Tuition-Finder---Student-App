@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -92,9 +93,11 @@ public class MainAppScreen extends AppCompatActivity
     private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
     private HashMap<Integer, JSONObject> hashMapTutors = new HashMap<Integer, JSONObject>();
     TextView Num;
+    ImageView gototutorhome,calltutorhome;
     SeekBar seekbar;
     String seekbarValue;
     int radius;
+    LinearLayout gotoLinear,callLinear;
 
 
 
@@ -138,8 +141,24 @@ public class MainAppScreen extends AppCompatActivity
         AutoCourseFillData();
         setSupportActionBar(toolbar);
 
-
-        serach = (Button) findViewById(R.id.search_butons);
+            gotoLinear = (LinearLayout) findViewById(R.id.gotohomeimageLinearLayour);
+            callLinear = (LinearLayout)findViewById(R.id.calltohomeimageLinearLayout);
+            gototutorhome = (ImageView)findViewById(R.id.gotohomeimage);
+            gototutorhome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gotoLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+                }
+            });
+            //#FFBEBABA
+            calltutorhome = (ImageView)findViewById(R.id.calltohomeimage);
+            calltutorhome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+                }
+            });
+            serach = (Button) findViewById(R.id.search_butons);
         serach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -516,14 +535,11 @@ public class MainAppScreen extends AppCompatActivity
 //        } else {
 //            phone = "+92" + phone.substring(1);
 //        }
-
-
-
-        Toast.makeText(MainAppScreen.this,""+seekbarValue,Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainAppScreen.this,""+seekbarValue,Toast.LENGTH_LONG).show();
         if(seekbarValue == null )
         {
             seekbarValue = "1";
-            Toast.makeText(MainAppScreen.this,"if : "+seekbarValue,Toast.LENGTH_LONG).show();
+          //  Toast.makeText(MainAppScreen.this,"if : "+seekbarValue,Toast.LENGTH_LONG).show();
         }
         AndroidNetworking.get(URLStudents.URL_TutorGetInfo)
                 .addQueryParameter("studentId", channel)
@@ -550,13 +566,15 @@ logDebug("Response :  "+response);
                                 double latitude = tutor.getDouble("Latitude");
                                 String name = tutor.getString("TutName");
                                 String TutPhone = tutor.getString("TutPhone");
+                                String Teachingtypes =tutor.getString("TeachingType");
+                                String TeacherQualif =tutor.getString("TutQual");
                                 LatLng latLng = new LatLng(latitude, longitude);
                                 MarkerOptions markerOptions = new MarkerOptions();
 
                                 markerOptions.position(latLng);
                                 markerOptions.title("" + name);
                                 markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.tutorpin));
-                                markerOptions.snippet(TutPhone);
+                                markerOptions.snippet(TeacherQualif);
 
                                 Marker marker = mMap.addMarker(markerOptions);
 
@@ -587,7 +605,7 @@ logDebug("Response :  "+response);
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        logDebug("Error   " + error);
+                        logDebug("Error   " + error.getLocalizedMessage());
 
                     }
                 });
@@ -603,6 +621,12 @@ logDebug("Response :  "+response);
         SharedPreferences shared = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         String channel = (shared.getString(Login.PREF_UNAME, ""));
 
+        if(seekbarValue == null )
+        {
+            seekbarValue = "1";
+            //  Toast.makeText(MainAppScreen.this,"if : "+seekbarValue,Toast.LENGTH_LONG).show();
+        }
+
         logDebug("username  " + channel);
         logDebug("courses  " + autoCompleteTextView.getText().toString());
         logDebug("Latitude:  " + mLastLocation.getLatitude() + "\n Longitutde:  " + mLastLocation.getLongitude());
@@ -617,6 +641,8 @@ logDebug("Response :  "+response);
                 .addQueryParameter("longitude", "" + mLastLocation.getLongitude())
                 .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
                 .addQueryParameter("courses", autoCompleteTextView.getText().toString())
+                .addQueryParameter("radius", String.valueOf(Integer.parseInt(seekbarValue)))
+                .addQueryParameter("checktuition", "BOTH")
                 .setTag("test")
                 .setPriority(Priority.HIGH)
                 .build()

@@ -79,11 +79,13 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         t2 = (TextView)findViewById(R.id.tv_qualification);
         t3 = (TextView)findViewById(R.id.tv_timing);
         t4= (TextView)findViewById(R.id.tv_salary);
+        t5 = (TextView)findViewById(R.id.tv_tuitionType);
         r = (findViewById(R.id.ratingbar));
         try {
             t2.setText(tutor.getString("TutQual"));
             t1.setText(tutor.getString("TutName"));
             t3.setText(tutor.getString("TeachingDays"));
+            t5.setText("Teaching Place: "+tutor.getString("TeachingType"));
             t4.setText(tutor.getString(""));
             r.setRating((float) tutor.getDouble("TutRating"));
 

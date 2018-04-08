@@ -163,14 +163,18 @@ android:layout_gravity="center"
             android:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/gotohomeimageLinearLayour"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2.5dp"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image1"
+                    android:id="@+id/gotohomeimage"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:src="@drawable/tutorhomenew"
@@ -182,19 +186,25 @@ android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Go to Tutor Home"
+                    android:textColor="#000"
                     />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/calltohomeimageLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="2.5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image2"
+                    android:id="@+id/calltohomeimage"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:src="@drawable/studenthome"
@@ -205,6 +215,7 @@ android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_height="wrap_content"
                     android:text="Call Tutor Home"
+                    android:textColor="#000"
                     />
 
             </LinearLayout>
