@@ -20,11 +20,26 @@ import com.example.saadiqbal.ht_studentmodule.CoursePKG.Authentication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 public class Signup extends AppCompatActivity {
     EditText name,email,password,contactno,repass;
     TextView backlogin;
-    String pass,repasscheck;
+    String pass,repasscheck,emailstore;
     Button register;
+    public final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9+._%-+]{1,256}" +
+                    "@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
+                    "(" +
+                    "." +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,25}" +
+                    ")+"
+    );
+    public final Pattern PHONE_NUMBER_PATTERN = Pattern.compile(
+            "[0-9]{1,256}" +
+                    "[0-9]{1,256}"
+    );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,16 +79,23 @@ public class Signup extends AppCompatActivity {
     public void validations() {
         pass = password.getText().toString();
         repasscheck = repass.getText().toString();
+        emailstore = email.getText().toString();
+
         if (name.getText().toString().isEmpty())
         {
             name.setError("Name is required!");
             requestFocus(name);
             return;
         }
-
         else if (email.getText().toString().isEmpty())
         {
             email.setError("Email is required!");
+            requestFocus(email);
+            return;
+        }
+        else if (!EMAIL_ADDRESS_PATTERN.matcher(emailstore).matches())
+        {
+            email.setError("Enter Valid Email Address!");
             requestFocus(email);
             return;
         }
