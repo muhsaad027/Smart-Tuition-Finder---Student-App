@@ -6,5 +6,7 @@
     <color name="swipebg">#cc3333</color>
     <color name="toolbartextcolor">#ffffff</color>
     <color name="lineargreycolor">#FFBEBABA</color>
+    <color name="white">#ffffff</color>
+
 
 </resources>

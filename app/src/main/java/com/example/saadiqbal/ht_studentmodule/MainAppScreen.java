@@ -1,13 +1,18 @@
 package com.example.saadiqbal.ht_studentmodule;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -95,7 +100,7 @@ public class MainAppScreen extends AppCompatActivity
     TextView Num;
     ImageView gototutorhome,calltutorhome;
     SeekBar seekbar;
-    String seekbarValue;
+    String seekbarValue,SturdyType;
     int radius;
     LinearLayout gotoLinear,callLinear;
 
@@ -147,7 +152,19 @@ public class MainAppScreen extends AppCompatActivity
             gototutorhome.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gotoLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+
+                    int colorId = R.color.white;
+                    if (gotoLinear.getTag() != null)
+                        colorId = (int) gotoLinear.getTag();
+
+
+                    if ( colorId == R.color.lineargreycolor) {
+                        gotoLinear.setTag(R.color.white);
+                        gotoLinear.setBackgroundColor(getResources().getColor(R.color.white));
+                    } else {
+                        gotoLinear.setTag(R.color.lineargreycolor);
+                        gotoLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+                    }
                 }
             });
             //#FFBEBABA
@@ -155,7 +172,18 @@ public class MainAppScreen extends AppCompatActivity
             calltutorhome.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+                    int colorId = R.color.white;
+                    if (callLinear.getTag() != null)
+                        colorId = (int) callLinear.getTag();
+
+
+                    if ( colorId == R.color.lineargreycolor) {
+                        callLinear.setTag(R.color.white);
+                        callLinear.setBackgroundColor(getResources().getColor(R.color.white));
+                    } else {
+                        callLinear.setTag(R.color.lineargreycolor);
+                        callLinear.setBackgroundColor(getResources().getColor(R.color.lineargreycolor));
+                    }
                 }
             });
             serach = (Button) findViewById(R.id.search_butons);
@@ -189,7 +217,7 @@ public class MainAppScreen extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (autoCompleteTextView != null) {
-
+   // new AsyncCaller().execute();
                     reqsend();
                 }
                 if (autoCompleteTextView.getText().toString().isEmpty()) {
@@ -615,6 +643,19 @@ logDebug("Response :  "+response);
     public void reqsend() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        if(gotoLinear.getTag() != null &&(int) gotoLinear.getTag() == R.color.lineargreycolor && callLinear.getTag() != null &&(int)  callLinear.getTag() == R.color.lineargreycolor){
+            SturdyType = "BOTH";
+        }
+        else if(gotoLinear.getTag() != null &&(int)  gotoLinear.getTag()==R.color.lineargreycolor)
+        {
+            SturdyType = "TUTOR LOCATION";
+        }
+        else if(callLinear.getTag() != null &&(int)  callLinear.getTag()==R.color.lineargreycolor)
+        {
+            SturdyType = "STUDENT LOCATION";
+        }else {
+            SturdyType = "BOTH";
+        }
         if (bundle != null) {
             phone = (String) bundle.get("phonenumber");
         }
@@ -642,7 +683,7 @@ logDebug("Response :  "+response);
                 .addQueryParameter("latitude", "" + mLastLocation.getLatitude())
                 .addQueryParameter("courses", autoCompleteTextView.getText().toString())
                 .addQueryParameter("radius", String.valueOf(Integer.parseInt(seekbarValue)))
-                .addQueryParameter("checktuition", "BOTH")
+                .addQueryParameter("checktuition", ""+SturdyType)
                 .setTag("test")
                 .setPriority(Priority.HIGH)
                 .build()
@@ -655,11 +696,16 @@ logDebug("Response :  "+response);
 
 
 
+
                         try {
                             JSONArray tutorArray = response.getJSONArray("result");
                             JSONObject tutorObject = tutorArray.getJSONObject(0);
 
                             reqID = tutorObject.getString("requestId");
+                        if(reqID != null)
+                        {
+
+                        }
                             // reqID
                             //
                             logDebug("Response  :  " + response);
@@ -745,6 +791,55 @@ logDebug("Response :  "+response);
                 });
 
 
+
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            RequestFragment rf = new RequestFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
+
+
+
+            ft.setCustomAnimations(R.anim.slide_in, R.anim.slide_out);
+            ft.replace(R.id.mainappcontainer, rf);
+
+
+            ft.commit();
+
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            //this method will be running on background thread so don't update UI frome here
+            //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
+
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            reqsend();
+            //this method will be running on UI thread
+
+
+        }
 
     }
 
