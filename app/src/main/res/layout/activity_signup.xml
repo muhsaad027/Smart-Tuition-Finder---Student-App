@@ -141,7 +141,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/mybutton"
-            android:text="NEXT"
+            android:text="Register"
             android:textColor="#ffff"
             android:textSize="20dp"
             android:textStyle="bold" />
