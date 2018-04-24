@@ -8,6 +8,9 @@
         <item
             android:id="@+id/COURSES"
             android:title="MY TUITION" />
+        <item
+            android:id="@+id/Chating"
+            android:title="INBOX" />
         <!--<item-->
             <!--android:id="@+id/FAQS"-->
             <!--android:title="FAQS" />-->

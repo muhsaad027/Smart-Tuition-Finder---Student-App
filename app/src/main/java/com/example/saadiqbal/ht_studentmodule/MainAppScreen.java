@@ -343,6 +343,11 @@ public class MainAppScreen extends AppCompatActivity
 
 
 //        }
+        else if (id == R.id.Chating) {
+            Intent iaa = new Intent(this, NewChatActivity.class);
+            startActivity(iaa);
+
+        }
         else if (id == R.id.SETTINGS) {
             Intent iaa = new Intent(this, Settings.class);
             startActivity(iaa);

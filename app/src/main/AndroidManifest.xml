@@ -62,6 +62,7 @@
             android:label="Inbox"
             android:theme="@style/AppTheme" />
         <activity android:name=".ContactDet" />
+        <activity android:name=".NewChatActivity" />
         <activity android:name=".RequsetProgress" />
         <activity android:name=".Courses" />
         <activity android:name=".FAQs" />
