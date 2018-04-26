@@ -22,6 +22,7 @@ public class URLStudents {
     public static final String URL_StudentCourses ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/StudentCourse";
     public static final String URL_FinishTuition ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/finishTuition";
     public static final String URL_CustomizeRequestTutor ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/customizeSendRequestTutor";
+    public static final String URL_PasswordUpdate ="http://hometuition.ahmedgraf.com/HomeTuition/Test1/updateStudent_Password";
 
     //http://hometuition.ahmedgraf.com/HomeTuition/Test1/customizeSendRequestTutor
 
