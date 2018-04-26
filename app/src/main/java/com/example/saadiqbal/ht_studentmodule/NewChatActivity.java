@@ -1,8 +1,10 @@
 package com.example.saadiqbal.ht_studentmodule;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ public class NewChatActivity extends AppCompatActivity {
 
     private EditText messageET;
     private ListView messagesContainer;
+    String messagecoming,Datemesage;
     private Button sendBtn;
     private NewChatAdapter adapter;
     private ArrayList<NewChatMessage> chatHistory;
@@ -27,6 +30,27 @@ public class NewChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_chat);
         initControls();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            messagecoming = (String) bundle.get("message");
+        }
+        Log.v("Chatactivity","Message _______ "+messagecoming);
+
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            messagecoming = (String) bundle.get("message");
+        }
+        Log.v("Chatactivity","Message _______ "+messagecoming);
     }
 
     private void initControls() {

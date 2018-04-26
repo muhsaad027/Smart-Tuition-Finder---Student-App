@@ -1,7 +1,5 @@
 package com.example.saadiqbal.ht_studentmodule;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -9,14 +7,26 @@ import android.net.NetworkInfo;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.saadiqbal.ht_studentmodule.Login;
+import com.example.saadiqbal.ht_studentmodule.MainAppScreen;
+import com.example.saadiqbal.ht_studentmodule.R;
+import com.example.saadiqbal.ht_studentmodule.Signup;
+import com.example.saadiqbal.ht_studentmodule.URLStudents;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -28,6 +38,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -61,13 +74,13 @@ public class AuthenticationForgetYourPassword extends AppCompatActivity implemen
         setContentView(R.layout.activity_forget_your_password);
 
 
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
             phone = (String) bundle.get("nameT");
         }
-
 
         //Fast Networking Library
         AndroidNetworking.initialize(getApplicationContext());
@@ -129,6 +142,7 @@ public class AuthenticationForgetYourPassword extends AppCompatActivity implemen
 
         startPhoneNumberVerification(phone);
         Log.d(TAG, phone);
+
     }
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -140,11 +154,14 @@ public class AuthenticationForgetYourPassword extends AppCompatActivity implemen
                             FirebaseUser user = task.getResult().getUser();
 
                             if (isNetworkAvailable()) {
-
                             } else {
                                 Snackbar.make(findViewById(android.R.id.content), "Internet Not Connected",
                                         Snackbar.LENGTH_SHORT).show();
                             }
+                            Intent i = new Intent(AuthenticationForgetYourPassword.this,ForgetPassword.class);
+                            startActivity(i);
+                            finish();
+
 
                             FirebaseAuth.getInstance().signOut();
                         } else {
@@ -192,7 +209,7 @@ public class AuthenticationForgetYourPassword extends AppCompatActivity implemen
         FirebaseApp.initializeApp(this);
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            startActivity(new Intent(AuthenticationForgetYourPassword.this, ForgetPassword.class));
+            startActivity(new Intent(AuthenticationForgetYourPassword.this, MainAppScreen.class));
             finish();
         }
     }

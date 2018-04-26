@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.saadiqbal.ht_studentmodule.Login;
 import com.example.saadiqbal.ht_studentmodule.MainAppScreen;
+import com.example.saadiqbal.ht_studentmodule.NewChatActivity;
 import com.example.saadiqbal.ht_studentmodule.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -58,22 +59,44 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                        .setContentTitle(""+notificationObject.getString("title"))
                        .setContentText(""+notificationObject.getString("message"));
 
-       Intent notificationIntent = new Intent(this, MainAppScreen.class);
-       notificationIntent.putExtra("title",notificationObject.getString("title"));
-       notificationIntent.putExtra("phoneNo",notificationObject.getString("phoneNo"));
-       notificationIntent.putExtra("type",notificationObject.getString("type"));
-       notificationIntent.putExtra("reqId",notificationObject.getString("reqId"));
-       notificationIntent.putExtra("timestamp",notificationObject.getString("timestamp"));
+       switch (notificationObject.getString("type"))
+       {
+           case "Message":
+               Intent notificationIntentss = new Intent(this, NewChatActivity.class);
+               notificationIntentss.putExtra("title", notificationObject.getString("title"));
+               notificationIntentss.putExtra("type", notificationObject.getString("type"));
+               notificationIntentss.putExtra("reqId", notificationObject.getString("reqId"));
+               notificationIntentss.putExtra("message", notificationObject.getString("message"));
 
 
-       PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-               PendingIntent.FLAG_UPDATE_CURRENT);
-       builder.setContentIntent(contentIntent);
-       builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+               PendingIntent contentIntentss = PendingIntent.getActivity(this, 0, notificationIntentss,
+                       PendingIntent.FLAG_UPDATE_CURRENT);
+               builder.setContentIntent(contentIntentss);
+               builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+
+               NotificationManager managerss = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+               managerss.notify(0, builder.build());
+               break;
+           default:
+               Intent notificationIntent = new Intent(this, MainAppScreen.class);
+               notificationIntent.putExtra("title",notificationObject.getString("title"));
+               notificationIntent.putExtra("phoneNo",notificationObject.getString("phoneNo"));
+               notificationIntent.putExtra("type",notificationObject.getString("type"));
+               notificationIntent.putExtra("reqId",notificationObject.getString("reqId"));
+               notificationIntent.putExtra("timestamp",notificationObject.getString("timestamp"));
+
+
+               PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                       PendingIntent.FLAG_UPDATE_CURRENT);
+               builder.setContentIntent(contentIntent);
+               builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
 //        builder.setColor(Integer.parseInt(remoteMessage.getNotification().getColor()));
-       // Add as notification
-       NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-       manager.notify(0, builder.build());
+               // Add as notification
+               NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+               manager.notify(0, builder.build());
+               break;
+       }
+
     }
 }
