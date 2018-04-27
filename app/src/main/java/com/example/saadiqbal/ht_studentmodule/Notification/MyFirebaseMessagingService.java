@@ -65,8 +65,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                Intent notificationIntentss = new Intent(this, NewChatActivity.class);
                notificationIntentss.putExtra("title", notificationObject.getString("title"));
                notificationIntentss.putExtra("type", notificationObject.getString("type"));
-               notificationIntentss.putExtra("reqId", notificationObject.getString("reqId"));
+               notificationIntentss.putExtra("chatId", notificationObject.getString("chatId"));
                notificationIntentss.putExtra("message", notificationObject.getString("message"));
+               notificationIntentss.putExtra("tutname", notificationObject.getString("tutname"));
+               notificationIntentss.putExtra("createdat", notificationObject.getString("createdat"));
 
 
                PendingIntent contentIntentss = PendingIntent.getActivity(this, 0, notificationIntentss,

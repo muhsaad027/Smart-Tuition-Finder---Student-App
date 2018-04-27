@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class NewChatActivity extends AppCompatActivity {
 
     private EditText messageET;
     private ListView messagesContainer;
-    String messagecoming,Datemesage;
+    String messagecoming,Datemesage,idchat,tutname;
     private Button sendBtn;
     private NewChatAdapter adapter;
     private ArrayList<NewChatMessage> chatHistory;
@@ -36,6 +37,22 @@ public class NewChatActivity extends AppCompatActivity {
 
         if (bundle != null) {
             messagecoming = (String) bundle.get("message");
+            idchat = (String) bundle.get("chatId");
+            // messageId
+            // 125
+           // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
+            //
+
+            NewChatMessage msg = new NewChatMessage();
+            //id
+            //setmefalse
+            //dateTime
+            int in = Integer.valueOf(idchat);
+            msg.setId(in);
+            msg.setMe(false);
+            msg.setMessage(messagecoming);
+            msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+            displayMessage(msg);
         }
         Log.v("Chatactivity","Message _______ "+messagecoming);
 
@@ -49,8 +66,25 @@ public class NewChatActivity extends AppCompatActivity {
 
         if (bundle != null) {
             messagecoming = (String) bundle.get("message");
+            idchat = (String) bundle.get("chatId");
+            // messageId
+            // 125
+            // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
+            //
+
+            NewChatMessage msg = new NewChatMessage();
+            //id
+            //setmefalse
+            //dateTime
+            int in = Integer.valueOf(idchat);
+            msg.setId(in);
+            msg.setMe(false);
+            msg.setMessage(messagecoming);
+            msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+            displayMessage(msg);
         }
-        Log.v("Chatactivity","Message _______ "+messagecoming);
+        Log.v("Chatactivity","On new inten Message _______ "+messagecoming);
+
     }
 
     private void initControls() {
@@ -100,6 +134,10 @@ public class NewChatActivity extends AppCompatActivity {
         chatHistory = new ArrayList<NewChatMessage>();
 
         NewChatMessage msg = new NewChatMessage();
+        //id
+        //setmefalse
+        //dateTime
+
         msg.setId(1);
         msg.setMe(false);
         msg.setMessage("Hi");
