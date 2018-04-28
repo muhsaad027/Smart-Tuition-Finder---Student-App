@@ -1,5 +1,6 @@
 package com.example.saadiqbal.ht_studentmodule;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,7 +47,7 @@ public class NewChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_chat);
         initControls();
-
+        NotificationClose(this,0);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -89,6 +90,7 @@ public class NewChatActivity extends AppCompatActivity {
             messagecoming = (String) bundle.get("message");
             idchat = (String) bundle.get("chatId");
             TutorPhone = (String) bundle.get("phonenumer");
+            NotificationClose(this,0);
             // messageId
             // 125
             // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
@@ -235,5 +237,11 @@ public class NewChatActivity extends AppCompatActivity {
         // Get value
         tutphone = settings.getString(PREF_UNAME, "");
         return tutphone;
+    }
+    public static void NotificationClose(Context ctx,int notifyID)
+    {
+        String a = Context.NOTIFICATION_SERVICE;
+        NotificationManager m = (NotificationManager)ctx.getSystemService(a);
+        m.cancel(notifyID);
     }
 }

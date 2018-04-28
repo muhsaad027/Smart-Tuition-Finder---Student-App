@@ -88,7 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                notificationIntent.putExtra("timestamp",notificationObject.getString("timestamp"));
 
 
-               PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+               PendingIntent contentIntent = PendingIntent.getActivity(this, 1, notificationIntent,
                        PendingIntent.FLAG_UPDATE_CURRENT);
                builder.setContentIntent(contentIntent);
                builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
@@ -96,7 +96,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        builder.setColor(Integer.parseInt(remoteMessage.getNotification().getColor()));
                // Add as notification
                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-               manager.notify(0, builder.build());
+               manager.notify(1, builder.build());
                break;
        }
 

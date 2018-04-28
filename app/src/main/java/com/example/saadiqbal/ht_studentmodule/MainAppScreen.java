@@ -1,6 +1,7 @@
 package com.example.saadiqbal.ht_studentmodule;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -114,6 +115,7 @@ public class MainAppScreen extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         autoCompleteTextView = (AutoCompleteTextView)  findViewById(R.id.searchAutoComplete);
             Num = (TextView)findViewById(R.id.textView1);
+            NotificationClose(this,1);
             seekbar = (SeekBar)findViewById(R.id.seekbar);
             sendmessages = (Button) findViewById(R.id.sendphonenumber) ;
             sendmessages.setOnClickListener(new View.OnClickListener() {
@@ -863,5 +865,10 @@ logDebug("Response :  "+response);
         }
 
     }
-
+    public static void NotificationClose(Context ctx,int notifyID)
+    {
+        String a = Context.NOTIFICATION_SERVICE;
+        NotificationManager m = (NotificationManager)ctx.getSystemService(a);
+        m.cancel(notifyID);
+    }
 }
