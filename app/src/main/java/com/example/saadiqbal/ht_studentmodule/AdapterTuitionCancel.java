@@ -8,11 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -60,7 +56,7 @@ public class AdapterTuitionCancel extends RecyclerView.Adapter<AdapterTuitionCan
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_order_cancel, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_tuition_finish, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
