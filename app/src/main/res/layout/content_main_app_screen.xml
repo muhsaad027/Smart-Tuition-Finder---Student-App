@@ -151,6 +151,21 @@ android:layout_gravity="center"
                 android:clickable="true"
                 android:textAlignment="center" />
 
+            <Button
+                android:id="@+id/sendphonenumber"
+                android:layout_width="match_parent"
+                android:background="@drawable/boarderbuton"
+                android:layout_height="wrap_content"
+                android:textColor="#FF246A72"
+                android:text="SEND MESSAGE"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                />
+
 
         </LinearLayout>
 

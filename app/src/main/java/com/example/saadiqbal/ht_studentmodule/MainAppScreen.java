@@ -103,6 +103,7 @@ public class MainAppScreen extends AppCompatActivity
     String seekbarValue,SturdyType;
     int radius;
     LinearLayout gotoLinear,callLinear;
+    Button sendmessages;
 
 
 
@@ -114,6 +115,18 @@ public class MainAppScreen extends AppCompatActivity
         autoCompleteTextView = (AutoCompleteTextView)  findViewById(R.id.searchAutoComplete);
             Num = (TextView)findViewById(R.id.textView1);
             seekbar = (SeekBar)findViewById(R.id.seekbar);
+            sendmessages = (Button) findViewById(R.id.sendphonenumber) ;
+            sendmessages.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent n  = new Intent(MainAppScreen.this,NewChatActivity.class);
+                    n.putExtra("phonenumer",contact);
+                    n.putExtra("Type",1);
+                    startActivity(n);
+                }
+            });
+
+
             seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
                 @Override
@@ -441,6 +454,9 @@ public class MainAppScreen extends AppCompatActivity
             ll_datares.setVisibility(View.VISIBLE);
             ll_rec.setVisibility(View.GONE);
             contact = bundle.getString("phoneNo");
+
+
+
             String type = bundle.getString("type");
             String name = bundle.getString("title");
             logDebug("Name" + name);

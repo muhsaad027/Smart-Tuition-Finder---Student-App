@@ -1,6 +1,8 @@
 package com.example.saadiqbal.ht_studentmodule;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,6 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.saadiqbal.ht_studentmodule.Notification.SendRegistrationTokenFCM;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,10 +33,13 @@ public class NewChatActivity extends AppCompatActivity {
 
     private EditText messageET;
     private ListView messagesContainer;
-    String messagecoming,Datemesage,idchat,tutname;
+    String messageText;
+    String messagecoming,Datemesage,idchat,tutname,TutorPhone,phone;
     private Button sendBtn;
     private NewChatAdapter adapter;
     private ArrayList<NewChatMessage> chatHistory;
+    public static final String PREFS_NAME = "preferences";
+    public static final String PREF_UNAME = "Username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +51,33 @@ public class NewChatActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
-            messagecoming = (String) bundle.get("message");
-            idchat = (String) bundle.get("chatId");
-            // messageId
-            // 125
-           // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
-            //
+            if ((int) bundle.get("Type") == 1) {
+                TutorPhone = (String) bundle.get("phonenumer");
+            } else {
 
-            NewChatMessage msg = new NewChatMessage();
-            //id
-            //setmefalse
-            //dateTime
-            int in = Integer.valueOf(idchat);
-            msg.setId(in);
-            msg.setMe(false);
-            msg.setMessage(messagecoming);
-            msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-            displayMessage(msg);
+
+                messagecoming = (String) bundle.get("message");
+                idchat = (String) bundle.get("chatId");
+                TutorPhone = (String) bundle.get("phonenumer");
+                // messageId
+                // 125
+                // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
+                //
+
+                NewChatMessage msg = new NewChatMessage();
+                //id
+                //setmefalse
+                //dateTime
+                int in = Integer.valueOf(idchat);
+                msg.setId(in);
+                msg.setMe(false);
+                msg.setMessage(messagecoming);
+                msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                displayMessage(msg);
+            }
+            Log.v("Chatactivity", "Message _______ " + messagecoming);
+
         }
-        Log.v("Chatactivity","Message _______ "+messagecoming);
-
-
     }
 
     @Override
@@ -67,6 +88,7 @@ public class NewChatActivity extends AppCompatActivity {
         if (bundle != null) {
             messagecoming = (String) bundle.get("message");
             idchat = (String) bundle.get("chatId");
+            TutorPhone = (String) bundle.get("phonenumer");
             // messageId
             // 125
             // Toast.makeText(this,"Student  "+idchat,Toast.LENGTH_SHORT).show();
@@ -101,7 +123,7 @@ public class NewChatActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String messageText = messageET.getText().toString();
+                 messageText = messageET.getText().toString();
                 if (TextUtils.isEmpty(messageText)) {
                     return;
                 }
@@ -113,7 +135,7 @@ public class NewChatActivity extends AppCompatActivity {
                 newChatMessage.setMe(true);
 
                 messageET.setText("");
-
+                datasend();
                 displayMessage(newChatMessage);
             }
         });
@@ -138,7 +160,7 @@ public class NewChatActivity extends AppCompatActivity {
         //setmefalse
         //dateTime
 
-        msg.setId(1);
+      /*  msg.setId(1);
         msg.setMe(false);
         msg.setMessage("Hi");
         msg.setDate(DateFormat.getDateTimeInstance().format(new Date()));
@@ -148,7 +170,7 @@ public class NewChatActivity extends AppCompatActivity {
         msg1.setMe(false);
         msg1.setMessage("How r u doing???");
         msg1.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-        chatHistory.add(msg1);
+        chatHistory.add(msg1);*/
 
         adapter = new NewChatAdapter(NewChatActivity.this, new ArrayList<NewChatMessage>());
         messagesContainer.setAdapter(adapter);
@@ -157,5 +179,61 @@ public class NewChatActivity extends AppCompatActivity {
             NewChatMessage message = chatHistory.get(i);
             displayMessage(message);
         }
+    }
+    public void datasend() {
+     phone = loadPreferences();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            TutorPhone = (String) bundle.get("phonenumer");
+        }
+            String text = TutorPhone;
+        AndroidNetworking.post(URLStudents.URL_SendMessage)
+
+                .addBodyParameter("StdPhone", phone)
+                .addBodyParameter("TutPhone", text)
+                .addBodyParameter("Message", messageText )
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        boolean error = false;
+                        String message = "";
+
+                        try {
+                            message = response.getString("message");
+                            error = response.getBoolean("error");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if (!error) {
+                            SendRegistrationTokenFCM.sendRegistrationToServer(NewChatActivity.this, FirebaseInstanceId.getInstance().getToken(), phone);
+                            Toast.makeText(NewChatActivity.this, "" + message, Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(NewChatActivity.this, "" + message, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                    }
+                });
+    }
+    private String loadPreferences() {
+
+        String tutphone;
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+
+        // Get value
+        tutphone = settings.getString(PREF_UNAME, "");
+        return tutphone;
     }
 }
