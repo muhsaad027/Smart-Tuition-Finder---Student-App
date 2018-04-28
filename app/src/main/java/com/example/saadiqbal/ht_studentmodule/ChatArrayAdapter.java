@@ -14,9 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by qasim on 10/12/2017.
- */
+
 public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
     private TextView chatText;
     private List<ChatMessage> MessageList = new ArrayList<ChatMessage>();

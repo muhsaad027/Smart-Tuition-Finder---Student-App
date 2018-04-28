@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class InboxActivityFragment extends Fragment {
 
     private RecyclerView mRecyclerView;

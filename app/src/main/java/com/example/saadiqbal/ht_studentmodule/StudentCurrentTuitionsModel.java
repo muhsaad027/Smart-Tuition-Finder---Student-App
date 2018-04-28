@@ -7,11 +7,7 @@ import org.json.JSONObject;
 
 /**
  * Created by Saad Iqbal on 3/3/2018.
- "TutName": "Farheen Iqbal",
- "TutPhone": "+923213105106",
- "TutQual": "Intermediate",
- "CourseName": "English Advance ",
- "TutorRating": null
+
  */
 
 public class StudentCurrentTuitionsModel {
