@@ -1,8 +1,6 @@
 package com.example.saadiqbal.ht_studentmodule.CoursePKG;
 
-/**
- * Created by Qasim Ahmed on 12/10/2017.
- */
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
