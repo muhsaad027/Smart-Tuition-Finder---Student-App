@@ -52,9 +52,12 @@ public class NewChatActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
+
+            try{
             if ((int) bundle.get("Type") == 1) {
                 TutorPhone = (String) bundle.get("phonenumer");
-            } else {
+            } }
+            catch ( Exception e )  {
 
 
                 messagecoming = (String) bundle.get("message");

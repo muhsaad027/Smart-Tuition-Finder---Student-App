@@ -62,7 +62,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
        switch (notificationObject.getString("type"))
        {
            case "Message":
-               Intent notificationIntentss = new Intent(this, NewChatActivity.class);
+               /*Intent notificationIntentss = new Intent(this, NewChatActivity.class);
                notificationIntentss.putExtra("title", notificationObject.getString("title"));
                notificationIntentss.putExtra("type", notificationObject.getString("type"));
                notificationIntentss.putExtra("chatId", notificationObject.getString("chatId"));
@@ -77,7 +77,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
                NotificationManager managerss = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-               managerss.notify(0, builder.build());
+               managerss.notify(0, builder.build());*/
+
+               Intent notificationIntentss = new Intent(this, NewChatActivity.class);
+               notificationIntentss.putExtra("title", notificationObject.getString("title"));
+               notificationIntentss.putExtra("type", notificationObject.getString("type"));
+               notificationIntentss.putExtra("chatId", notificationObject.getString("chatId"));
+               notificationIntentss.putExtra("message", notificationObject.getString("message"));
+               notificationIntentss.putExtra("tutname", notificationObject.getString("tutname"));
+               notificationIntentss.putExtra("createdat", notificationObject.getString("createdat"));
+               notificationIntentss.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+               builder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+               startActivity(notificationIntentss);
+
                break;
            default:
                Intent notificationIntent = new Intent(this, MainAppScreen.class);
