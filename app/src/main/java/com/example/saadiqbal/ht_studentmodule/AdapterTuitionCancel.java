@@ -1,6 +1,7 @@
 package com.example.saadiqbal.ht_studentmodule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,10 +18,10 @@ public class AdapterTuitionCancel extends RecyclerView.Adapter<AdapterTuitionCan
 
     private ArrayList<StudentCurrentTuitionsModel> arrayList ;
     Context acontext;
-
+String phonenumber;
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public Button bt_finish;
+        public Button bt_finish,chat_btn;
         public CardView mCardView;
         public TextView mTextView;
         public TextView stdname,stdid,stddphone,stdstatus,reqtime;
@@ -30,6 +31,7 @@ public class AdapterTuitionCancel extends RecyclerView.Adapter<AdapterTuitionCan
 
             mCardView = (CardView) v.findViewById(R.id.card_view_order_cancel);
             bt_finish = v.findViewById(R.id.bt_finish);
+            chat_btn = v.findViewById(R.id.bt_chat);
             stdname= (TextView) v.findViewById(R.id.StdName);
             stdid = (TextView) v.findViewById(R.id.StdReqID);
             stddphone = (TextView) v.findViewById(R.id.StdPhone);
@@ -44,6 +46,18 @@ public class AdapterTuitionCancel extends RecyclerView.Adapter<AdapterTuitionCan
                     Log.d("IDD","id : "+s);
                     RatingDailogeBox rdb = new RatingDailogeBox(acontext,arrayList.get(s));
                     rdb.show();
+                }
+            });
+            chat_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int s = getAdapterPosition();
+                    StudentCurrentTuitionsModel clickedItem =   arrayList.get(s);
+                    phonenumber =clickedItem.getStudentName();
+                    Intent i = new Intent(acontext,NewChatActivity.class);
+                    i.putExtra("phone",phonenumber);
+                    i.putExtra("Type",4);
+                    acontext.startActivity(i);
                 }
             });
         }

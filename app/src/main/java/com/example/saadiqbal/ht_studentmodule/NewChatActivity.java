@@ -56,7 +56,10 @@ public class NewChatActivity extends AppCompatActivity {
             try{
             if ((int) bundle.get("Type") == 1) {
                 TutorPhone = (String) bundle.get("phonenumer");
-            } }
+            }
+            else if ((int) bundle.get("Type") == 4){
+                TutorPhone = (String) bundle.get("phone");
+            }}
             catch ( Exception e )  {
 
 
@@ -187,17 +190,17 @@ public class NewChatActivity extends AppCompatActivity {
     }
     public void datasend() {
      phone = loadPreferences();
-        Intent intent = getIntent();
+      /*  Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
             TutorPhone = (String) bundle.get("phonenumer");
         }
-            String text = TutorPhone;
+            String text = TutorPhone;*/
         AndroidNetworking.post(URLStudents.URL_SendMessage)
 
                 .addBodyParameter("StdPhone", phone)
-                .addBodyParameter("TutPhone", text)
+                .addBodyParameter("TutPhone", TutorPhone)
                 .addBodyParameter("Message", messageText )
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
