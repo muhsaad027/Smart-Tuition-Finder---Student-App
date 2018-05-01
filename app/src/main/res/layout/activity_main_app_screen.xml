@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-    <ListView
+    <!--<ListView
         android:id="@+id/navList1"
+        android:visibility="gone"
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="#ffffff"/>
+        android:background="#ffffff"/>-->
     <include
         layout="@layout/app_bar_main_app_screen"
         android:layout_width="match_parent"

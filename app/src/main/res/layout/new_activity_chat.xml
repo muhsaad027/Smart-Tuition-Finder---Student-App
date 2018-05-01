@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:id="@+id/chatusername"
-                android:text="username"
+                android:text="Message"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="26dp" />
@@ -49,7 +49,7 @@
 
             android:autoText="true"
 
-            android:hint="type message" />
+            android:hint=" Enter Message" />
         <Button
 
             android:id="@+id/chatSendButton"

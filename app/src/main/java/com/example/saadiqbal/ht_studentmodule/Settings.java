@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import java.util.Set;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
     TextView tv_name, tv_email, tv_phno;
-    Button id_logout;
+    Button id_logout; ImageView back_bbnt;
     public static final String PREFS_NAME = "preferences";
     public static final String PREF_UNAME = "Username";
     @Override
@@ -36,12 +37,13 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         toolbar.setTitle("Settings");
         toolbar.setTitleTextColor(getResources().getColor(R.color.toolbartextcolor));
         setSupportActionBar(toolbar);*/
+       back_bbnt = (ImageView) findViewById(R.id.back_btn);
         tv_name = (TextView) findViewById(R.id.tv_name_setting);
         tv_email = (TextView) findViewById(R.id.tv_emails_setting);
         tv_phno = (TextView) findViewById(R.id.tv_phno_setting);
         id_logout = (Button) findViewById(R.id.id_logout);
         id_logout.setOnClickListener(this);
-
+        back_bbnt.setOnClickListener(this);
         datasend();
     }
 
@@ -105,8 +107,15 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 finish();
                 Intent intent = new Intent(this, AfterSlpash.class);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.back_btn:
+                Intent intents = new Intent(this, MainAppScreen.class);
+                startActivity(intents);
+                finish();
                 break;
         }
+
     }
     private String loadPreferences() {
 

@@ -45,6 +45,7 @@
         android:id="@+id/seekbar"
         android:layout_width="230dp"
         android:progress="3"
+        android:thumb="@drawable/circlees"
         android:layout_height="32dp"
         android:layout_marginRight="-90dp"
 
@@ -78,7 +79,7 @@ android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:hint="search Courses"
+            android:hint="search course"
             android:imeOptions="actionSearch"
             android:inputType="textAutoComplete|textAutoCorrect"></AutoCompleteTextView>
         <!--<EditText

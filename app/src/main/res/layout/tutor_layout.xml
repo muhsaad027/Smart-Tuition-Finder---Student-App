@@ -120,8 +120,8 @@
             android:layout_alignTop="@+id/tv_timing"
             android:layout_toEndOf="@+id/tv_qualification"
             android:layout_toRightOf="@+id/tv_qualification"
-            android:background="#de1d1d"
-            android:text="Cancel Request"
+            android:background="#246a72"
+            android:text="BAck"
             android:textColor="#fff"
             android:textStyle="bold" />
 

@@ -249,9 +249,9 @@ public class MainAppScreen extends AppCompatActivity
         });
         //t1.setOnClickListener(this);
         // t2.setOnClickListener(this);
-        mDrawerList = (ListView) findViewById(R.id.navList1);
+       /* mDrawerList = (ListView) findViewById(R.id.navList1);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        addDrawerItems();
+        addDrawerItems();*/
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)

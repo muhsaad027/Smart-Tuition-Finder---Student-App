@@ -20,18 +20,23 @@
         android:roundIcon="@mipmap/ic_ht_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AfterSlpash" />
-        <activity android:name=".Login" />
-        <activity android:name=".Signup" />
+        <activity android:name=".AfterSlpash"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Signup"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainAppScreen"
+            android:screenOrientation="portrait"
             android:label="Home Tuition"
             android:theme="@style/AppTheme" />
         <!--
@@ -48,30 +53,50 @@
 
         <activity
             android:name=".CoursePKG.CourseDetailActivity"
-            android:label="@string/app_name" />
-        <activity android:name=".CoursePKG.Course" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CoursePKG.Course"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MapsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ChatActivity"
+            android:screenOrientation="portrait"
             android:label="Chat"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".InboxActivity"
             android:label="Inbox"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ContactDet" />
+        <activity android:name=".ContactDet"
+            android:screenOrientation="portrait"/>
         <activity android:name=".NewChatActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"
             />
-        <activity android:name=".RequsetProgress" />
-        <activity android:name=".Courses" />
-        <activity android:name=".FAQs" />
-        <activity android:name=".HELP" />
-        <activity android:name=".Settings" />
-        <activity android:name=".About" />
-        <activity android:name=".Thanks" />
+        <activity android:name=".RequsetProgress"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Courses"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".FAQs"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".HELP"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Settings"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".About"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Thanks"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".CoursePKG.Authentication" />
 
         <service android:name=".Notification.MyFirebaseMessagingService">
@@ -85,15 +110,26 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".testcoursesautocompelete" />
+        <activity android:name=".testcoursesautocompelete"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".CurrentTuitons"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_current_tuitons"
             android:theme="@style/AppTheme" />
-        <activity android:name=".CustomizePopUpLayout" />
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".AuthenticationForgetYourPassword" />
-        <activity android:name=".EnterNumberForget"></activity>
+        <activity android:name=".CustomizePopUpLayout"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ForgetPassword"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".AuthenticationForgetYourPassword"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".EnterNumberForget"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>
