@@ -358,17 +358,24 @@ public class MainAppScreen extends AppCompatActivity
 
 
 //        }
-        else if (id == R.id.Chating) {
+        /*else if (id == R.id.Chating) {
             Intent iaa = new Intent(this, NewChatActivity.class);
             startActivity(iaa);
 
-        }
+        }*/
         else if (id == R.id.SETTINGS) {
             Intent iaa = new Intent(this, Settings.class);
             startActivity(iaa);
 
         } else if (id == R.id.CONTACT) {
             Intent iaa = new Intent(this, About.class);
+            startActivity(iaa);
+        }
+        else if (id == R.id.LOGOUT) {
+            SharedPreferences settings = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            settings.edit().clear().commit();
+            finish();
+            Intent iaa = new Intent(this, Login.class);
             startActivity(iaa);
         }
 

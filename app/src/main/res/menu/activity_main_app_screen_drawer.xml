@@ -8,9 +8,9 @@
         <item
             android:id="@+id/COURSES"
             android:title="MY TUITION" />
-        <item
+       <!-- <item
             android:id="@+id/Chating"
-            android:title="INBOX" />
+            android:title="INBOX" />-->
         <!--<item-->
             <!--android:id="@+id/FAQS"-->
             <!--android:title="FAQS" />-->
@@ -27,6 +27,12 @@
             <item
                 android:id="@+id/CONTACT"
                 android:title="CONTACT" />
+            <item
+                android:id="@+id/LOGOUT"
+                android:title="LOGOUT" />
         </menu>
+
+
+
     </item>
 </menu>
